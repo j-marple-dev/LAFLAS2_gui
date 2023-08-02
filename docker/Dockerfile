@@ -59,3 +59,7 @@ RUN echo "export PATH=/home/user/.local/bin:\$PATH" >> /home/user/.bashrc
 RUN echo "export LC_ALL=C.UTF-8 && export LANG=C.UTF-8" >> /home/user/.bashrc
 
 # Place your environment here
+RUN python -m pip install --upgrade pip setuptools
+RUN python -m pip install "kivy[base]" kivy_examples kivymd plyer matplotlib jupyter pandas seaborn customtkinter pandastable
+
+RUN sudo apt-get install -y yad xclip net-tools python3-tk
