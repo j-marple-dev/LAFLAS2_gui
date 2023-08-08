@@ -7,8 +7,7 @@
 
 import argparse
 
-from scripts.first_module.first_module import demo_print_hello
-from scripts.second_module.second_module import demo_generate_world
+from scripts.app.laflas_app import LaflasApp
 
 
 def get_parser() -> argparse.Namespace:
@@ -28,6 +27,5 @@ def get_parser() -> argparse.Namespace:
 if __name__ == "__main__":
     args = get_parser()
 
-    demo_print_hello(args.hello)
-    world_repeated = demo_generate_world(args.world)
-    print(world_repeated)
+    app = LaflasApp()
+    app.mainloop()
