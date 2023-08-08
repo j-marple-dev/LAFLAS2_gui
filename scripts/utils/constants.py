@@ -60,6 +60,7 @@ AERO_ATTRIBUTES = [
     "aRef",
     "tMCA",
     "tMCN",
+    "tMCY",
 ]
 
 INIT_ATTRIBUTES = [
@@ -69,4 +70,15 @@ INIT_ATTRIBUTES = [
     "AZI0",
     "PAT0",
     "VEL0",
+]
+
+ENV_ATTRIBUTES = [
+    "iEarth",
+    "iAir",
+]
+
+TRK_ATTRIBUTES = [
+    "latg",
+    "lon",
+    "alt",
 ]
