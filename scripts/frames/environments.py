@@ -8,7 +8,7 @@
 from ast import literal_eval
 from typing import TYPE_CHECKING, Any, Optional, Union
 
-from scripts.frames.common_frames import LabelWithEntry, LaflasFrameBase
+from scripts.frames.common_frames import LabelWithComboBox, LaflasFrameBase
 from scripts.utils.constants import ENV_ATTRIBUTES
 
 if TYPE_CHECKING:
@@ -78,14 +78,18 @@ class EnvironmentFrame(LaflasFrameBase):
     def create_entries(self) -> None:
         """Create entries."""
         for i, attr in enumerate(ENV_ATTRIBUTES):
-            frame = LabelWithEntry(self, frame_id=attr, postfix="")
+            if i == 0:
+                frame = LabelWithComboBox(self, frame_id=attr, postfix="", combo_box=['0', '1', '2'])
+            else:
+                frame = LabelWithComboBox(self, frame_id=attr, combo_box=['0', '1'])
             frame.grid(row=(i // 2) + 1, column=i % 2, padx=10, pady=10)
             self.entries.update({attr: frame})
+
 
     def parse(self) -> dict:
         """Parse data."""
         result = {}
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             data = literal_eval(value.parse())
             result.update({key: data})
 

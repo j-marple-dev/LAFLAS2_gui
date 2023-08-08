@@ -178,7 +178,7 @@ class PhaseFrame(LaflasFrameBase):
     def parse(self) -> Any:
         """Parse data."""
         result = {"DoF": literal_eval(self.dof[0]), "cType": self.control_mode}
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             if key == "ID":
                 data = value.parse()
             elif key in ["attFix", "attVar", "actVar"]:

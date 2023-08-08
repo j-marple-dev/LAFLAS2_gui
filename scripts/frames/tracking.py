@@ -99,7 +99,7 @@ class TrackingFrame(LaflasFrameBase):
     def parse(self) -> dict:
         """Parse data."""
         result = {}
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             if key == "ID":
                 data = value.parse()
             else:

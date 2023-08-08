@@ -100,7 +100,7 @@ class AeroFrame(LaflasFrameBase):
         """Parse data."""
         result = {}
         checker = ["tMCA", "tMCN", "tMCY"]
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             if key in checker:
                 data = literal_eval(f"[{value.parse()}]")
                 print(f"{data}, {len(data)}")

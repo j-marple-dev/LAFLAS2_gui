@@ -53,7 +53,7 @@ class VariableMassFrame(LaflasFrameBase):
     def parse(self) -> dict:
         """Parse data."""
         result = {}
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             if key == "tVSthr":
                 data = literal_eval(f"[{value.parse()}]")
                 assert len(data) % 2 == 0, "The number of tVSthr have to be even."

@@ -85,7 +85,7 @@ class InitialConditionFrame(LaflasFrameBase):
     def parse(self) -> dict:
         """Parse data."""
         result = {}
-        for key, value in self.entries:
+        for key, value in self.entries.items():
             data = literal_eval(value.parse())
             result.update({key: data})
 
