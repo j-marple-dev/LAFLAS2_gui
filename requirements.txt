@@ -1,1 +1,3 @@
 # Place your pip dependencies here
+customtkinter
+pyyaml
