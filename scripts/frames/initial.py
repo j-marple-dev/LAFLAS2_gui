@@ -3,6 +3,7 @@
 -Author: Haneol Kim
 -Contact: hekim@jmarple.ai
 """
+# pylint: disable=duplicate-code
 
 from ast import literal_eval
 from typing import TYPE_CHECKING, Any, Optional, Union
