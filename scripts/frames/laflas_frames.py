@@ -4,8 +4,9 @@
 -Contact: hekim@jmarple.ai
 """
 
-import os
-from typing import TYPE_CHECKING, Any
+from typing import TYPE_CHECKING, Any, List
+
+from plyer import filechooser
 
 from scripts.frames.aero import Aero
 from scripts.frames.common_frames import ButtonWithEntry  # noqa; noqa
@@ -40,16 +41,18 @@ class SaveFileFrame(ButtonWithEntry):
             ph_text: placeholder text.
         """
         super().__init__(master, frame_id, button_text, **kwargs)  # type: ignore
+        self.selected_file = ""
 
     def button_pressed(self) -> None:
         """Call when button pressed."""
-        text = self.entry.get()
-        if text.startswith("/"):
-            save_dir = text
-        else:
-            save_dir = os.path.join(os.getcwd(), text)
+        filechooser.save_file(on_selection=self.handle_selection)  # type: ignore
+
+    def handle_selection(self, choose: List[str]) -> None:
+        """Handel file chooser selection."""
+        self.selected_file = choose
+        self.save_file_dir = choose[0]
         data = self.master.parse()  # type: ignore
-        dump_yaml(save_dir, data)
+        dump_yaml(self.save_file_dir, data)
 
 
 class MainScrollable(LaflasScrollableFrameBase):
