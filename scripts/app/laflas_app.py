@@ -30,7 +30,7 @@ class LaflasApp(CTk):
         self.rowconfigure(0, weight=1)
 
         self.geometry("1920x1080")
-        self.title("test app")
+        self.title("LAFLAS input GUI")
 
         self.main_frame = MainScrollable(self)
         self.main_frame.grid(row=0, column=0, sticky="NSEW")
