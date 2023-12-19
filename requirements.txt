@@ -1,3 +1,4 @@
 # Place your pip dependencies here
-customtkinter
+customtkinter==5.2.0
 pyyaml
+plyer==2.1.0

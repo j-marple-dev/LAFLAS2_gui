@@ -41,13 +41,6 @@ RUN sudo apt-get update && sudo apt-get upgrade -y
 RUN sudo apt-get install -y python3-pip python3-dev
 RUN sudo ln -s /usr/bin/python3 /usr/bin/python
 
-# Install cmake 3.21.0 version.
-RUN wget -q https://github.com/Kitware/CMake/releases/download/v3.21.0/cmake-3.21.0-linux-x86_64.tar.gz \
-    && tar -xzvf cmake-3.21.0-linux-x86_64.tar.gz \
-    && sudo ln -s /home/user/cmake-3.21.0-linux-x86_64/bin/cmake /usr/bin/cmake \
-    && sudo ln -s /home/user/root/cmake-3.21.0-linux-x86_64/bin/ctest /usr/bin/ctest \
-    && sudo ln -s /home/user/root/cmake-3.21.0-linux-x86_64/bin/cpack /usr/bin/cpack \
-    && rm cmake-3.21.0-linux-x86_64.tar.gz
 
 COPY ./requirements.txt ./
 COPY ./requirements-dev.txt ./
