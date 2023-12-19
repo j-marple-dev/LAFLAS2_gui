@@ -1,7 +1,7 @@
 """Main script for your project.
 
-- Author: Jongkuk Lim
-- Contact: limjk@jmarple.ai
+- Author: Haneol Kim
+- Contact: hekim@jmarple.ai
 """
 
 
