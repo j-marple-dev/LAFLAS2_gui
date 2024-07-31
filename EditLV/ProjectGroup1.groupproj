@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{31F970DE-827C-450C-857C-780084706B9F}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="EditLV.cbproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="..\EditOpt\EditOpt.cbproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="EditLV">
+        <MSBuild Projects="EditLV.cbproj"/>
+    </Target>
+    <Target Name="EditLV:Clean">
+        <MSBuild Projects="EditLV.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EditLV:Make">
+        <MSBuild Projects="EditLV.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="EditOpt">
+        <MSBuild Projects="..\EditOpt\EditOpt.cbproj"/>
+    </Target>
+    <Target Name="EditOpt:Clean">
+        <MSBuild Projects="..\EditOpt\EditOpt.cbproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EditOpt:Make">
+        <MSBuild Projects="..\EditOpt\EditOpt.cbproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="EditLV;EditOpt"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="EditLV:Clean;EditOpt:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="EditLV:Make;EditOpt:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
