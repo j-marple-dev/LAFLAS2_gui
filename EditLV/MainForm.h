@@ -13,6 +13,8 @@
 #include <Vcl.Buttons.hpp>
 #include <Vcl.Grids.hpp>
 #include <Vcl.ValEdit.hpp>
+#include <Vcl.Dialogs.hpp>
+#include <Vcl.ExtDlgs.hpp>
 //---------------------------------------------------------------------------
 class TEditLVForm : public TForm
 {
@@ -49,6 +51,9 @@ __published:	// IDE-managed Components
 	TButton *AddAFButton;
 	TButton *DelAFButton;
     TStringGrid *PhaseSG;
+	TSaveTextFileDialog *SaveDialog;
+	TStringGrid *AerodynamicSG;
+	TStringGrid *PhaseInfoSG;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FixMassAddButtonClick(TObject *Sender);
 	void __fastcall FixMassDelButtonClick(TObject *Sender);
@@ -67,6 +72,16 @@ __published:	// IDE-managed Components
 	void __fastcall PhaseAddButtonClick(TObject *Sender);
 	void __fastcall PhaseDelButtonClick(TObject *Sender);
 	void __fastcall MainPageControlChange(TObject *Sender);
+	void __fastcall PhaseSGMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+	void __fastcall PhaseSGSelectCell(TObject *Sender, System::LongInt ACol, System::LongInt ARow,
+		  bool &CanSelect);
+	void __fastcall VarMassSGMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
+	void __fastcall EnvironmentsSGMouseMove(TObject *Sender, TShiftState Shift, int X,
+		  int Y);
+	void __fastcall SaveButtonClick(TObject *Sender);
+
+
+
 private:	// User declarations
 public:		// User declarations
 	__fastcall TEditLVForm(TComponent* Owner);
