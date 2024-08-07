@@ -52,7 +52,8 @@ object FormOCF: TFormOCF
     ActivePage = TabSheet1
     Align = alClient
     TabOrder = 1
-    ExplicitHeight = 641
+    ExplicitWidth = 825
+    ExplicitHeight = 663
     object TabSheet1: TTabSheet
       Margins.Left = 10
       Margins.Top = 10
@@ -97,7 +98,7 @@ object FormOCF: TFormOCF
         ShowHint = True
         TabOrder = 0
         OnMouseUp = OnCommonMouseUp
-        ExplicitTop = 8
+        ExplicitWidth = 817
       end
       object OptEqCnstrSG: TStringGrid
         Left = 0
@@ -117,8 +118,7 @@ object FormOCF: TFormOCF
         ParentFont = False
         TabOrder = 1
         OnMouseUp = OnCommonMouseUp
-        ExplicitLeft = 8
-        ExplicitTop = 121
+        ExplicitWidth = 817
       end
       object OptLbCnstrSG: TStringGrid
         Left = 0
@@ -138,8 +138,7 @@ object FormOCF: TFormOCF
         ParentFont = False
         TabOrder = 2
         OnMouseUp = OnCommonMouseUp
-        ExplicitLeft = 8
-        ExplicitTop = 360
+        ExplicitWidth = 817
       end
       object Panel6: TPanel
         Left = 0
@@ -148,8 +147,7 @@ object FormOCF: TFormOCF
         Height = 23
         Align = alTop
         TabOrder = 3
-        ExplicitLeft = 16
-        ExplicitTop = 440
+        ExplicitWidth = 817
       end
       object Panel3: TPanel
         Left = 0
@@ -158,8 +156,7 @@ object FormOCF: TFormOCF
         Height = 23
         Align = alTop
         TabOrder = 4
-        ExplicitLeft = 3
-        ExplicitTop = 286
+        ExplicitWidth = 817
       end
       object OptUbCnstrSG: TStringGrid
         Left = 0
@@ -179,8 +176,7 @@ object FormOCF: TFormOCF
         ParentFont = False
         TabOrder = 5
         OnMouseUp = OnCommonMouseUp
-        ExplicitTop = 528
-        ExplicitWidth = 831
+        ExplicitWidth = 817
       end
     end
   end
