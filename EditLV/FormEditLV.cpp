@@ -43,7 +43,7 @@ void __fastcall TEditLVForm::FormCreate(TObject *Sender)
   VarMassSG->Cells[0][3] = "Propellant Mass [kg]";
   VarMassSG->Cells[0][4] = "ISP [sec]";
   VarMassSG->Cells[0][5] = "Nozzle Exit Area [m^2]";
-  VarMassSG->Cells[0][6] = "Thrust Description Type {T|M}";
+  VarMassSG->Cells[0][6] = "Thrust Description Type {T | M}";
   VarMassSG->Cells[0][7] = "  time [sec], {Ton | Mdot [kg/s]}";
 
   EnvironmentsSG->ColWidths[0] = 250;
@@ -355,7 +355,7 @@ void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 	outFile << "#" << endl;
 
 	outFile << "P" << endl;
-	outFile << to_string(PhaseSG->RowCount - 1) << " ";   // #phase
+	outFile << to_string(PhaseSG->RowCount-2) << " ";   // #phase
 	outFile << tostr(PhaseInfoSG->Cells[1][0])  << " ";   // phase iip
 	outFile << tostr(PhaseInfoSG->Cells[1][1])  << endl;  // iIIP rate
 	outFile << tostr(PhaseInfoSG->Cells[1][2])  << endl;  // phase type
@@ -585,9 +585,7 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
   infoSG->Cells[1][3] = line.c_str();    // phase sequence
 
   phaseSG->RowCount = phaseCount + 2;
-  for (int i = 2; i <= phaseCount; i++) {
-	//phaseSG->ColWidths[i] = 100;
-
+  for (int i = 2; i <= phaseSG->RowCount-1; i++) {
 	getline(inFile, line);
 	phaseSG->Cells[0][i] = line.c_str();
 
@@ -770,7 +768,7 @@ void __fastcall TEditLVForm::CommonSGMouseUp(TObject *Sender, TMouseButton Butto
 	CommonSG->Tag = ACol;
 
 	TPoint point = CommonSG->ClientToScreen(Point(X, Y));
-	CommonPopupMenu->Popup(point.x, point.y);
+	CommonPopup->Popup(point.x, point.y);
   }
 }
 //---------------------------------------------------------------------------
@@ -906,4 +904,24 @@ void __fastcall TEditLVForm::DelPhaseClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TEditLVForm::Panel1Resize(TObject *Sender)
+{
+  int panelCenterX = Panel1->Width / 2;
+  int panelCenterY = Panel1->Height / 2;
+
+  int buttonWidth = LoadButton->Width + SaveButton->Width;
+
+  int spacing = 50;
+
+  int totalWidth = buttonWidth + spacing;
+  int startX = panelCenterX - (totalWidth / 2);
+
+  LoadButton->Left = startX;
+  LoadButton->Top  = panelCenterY - (LoadButton->Height / 2);
+
+  SaveButton->Left = startX + SaveButton->Width + spacing;
+  SaveButton->Top  = panelCenterY - (SaveButton->Height / 2);
+}
+//---------------------------------------------------------------------------
 

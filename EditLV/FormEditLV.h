@@ -44,9 +44,9 @@ __published:	// IDE-managed Components
 	TStringGrid *AerodynamicSG;
 	TStringGrid *PhaseInfoSG;
 	TOpenDialog *OpenDialog;
-	TPopupMenu *CommonPopupMenu;
-	TMenuItem *AddFixMass;
-	TMenuItem *DelFixMass;
+	TPopupMenu *CommonPopup;
+	TMenuItem *AddColumn;
+	TMenuItem *DelColumn;
 	TPopupMenu *AerodynamicPopup;
 	TMenuItem *AddColumn1;
 	TMenuItem *DeleteColumn1;
@@ -64,6 +64,7 @@ __published:	// IDE-managed Components
 	TPopupMenu *PhasePopup;
 	TMenuItem *AddPhase;
 	TMenuItem *DelPhase;
+	TLabel *Label1;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall AddThrustButtonClick(TObject *Sender);
 	void __fastcall DelThrustButtonClick(TObject *Sender);
@@ -95,6 +96,7 @@ __published:	// IDE-managed Components
           int X, int Y);
 	void __fastcall AddPhaseClick(TObject *Sender);
 	void __fastcall DelPhaseClick(TObject *Sender);
+	void __fastcall Panel1Resize(TObject *Sender);
 
 
 
