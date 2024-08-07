@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
-  <Transactions>
-    <Transaction>2024-07-11 14:44:26.661,=D:\Dev\Project1PCH1.h</Transaction>
-    <Transaction>2024-07-11 14:44:26.791,=D:\Dev\Unit1.cpp</Transaction>
-    <Transaction>2024-07-11 14:51:08.794,D:\Dev\EditOptPCH1.h=D:\Dev\Project1PCH1.h</Transaction>
-    <Transaction>2024-07-11 14:51:08.800,D:\Dev\EditOpt.cbproj=D:\Dev\Project1.cbproj</Transaction>
-    <Transaction>2024-07-11 14:56:02.746,D:\Dev\FormEditOpt.h=D:\Dev\Unit1.h</Transaction>
-    <Transaction>2024-07-11 14:56:02.746,D:\Dev\FormEditOpt.cpp=D:\Dev\Unit1.cpp</Transaction>
-    <Transaction>2024-07-11 14:56:02.746,D:\Dev\FormEditOpt.dfm=D:\Dev\Unit1.dfm</Transaction>
-    <Transaction>2024-07-11 15:07:32.093,D:\LAFLAS\EditOpt\EditOptPCH2.h=D:\Dev\EditOptPCH1.h</Transaction>
-    <Transaction>2024-07-11 15:07:32.159,D:\LAFLAS\EditOpt\FormEditOpt.cpp=D:\Dev\FormEditOpt.cpp</Transaction>
-    <Transaction>2024-07-11 15:07:32.159,D:\LAFLAS\EditOpt\FormEditOpt.dfm=D:\Dev\FormEditOpt.dfm</Transaction>
-    <Transaction>2024-07-11 15:07:32.159,D:\LAFLAS\EditOpt\FormEditOpt.h=D:\Dev\FormEditOpt.h</Transaction>
-    <Transaction>2024-07-11 15:07:32.240,D:\LAFLAS\EditOpt\EditOpt.cbproj=D:\Dev\EditOpt.cbproj</Transaction>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.159,D:\Dev\FormEditOpt.h=D:\LAFLAS\EditOpt\FormEditOpt.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.661,=D:\Dev\Project1PCH1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.794,D:\Dev\Project1PCH1.h=D:\Dev\EditOptPCH1.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.159,D:\Dev\FormEditOpt.dfm=D:\LAFLAS\EditOpt\FormEditOpt.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.093,D:\Dev\EditOptPCH1.h=D:\LAFLAS\EditOpt\EditOptPCH2.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.746,D:\Dev\Unit1.dfm=D:\Dev\FormEditOpt.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.746,D:\Dev\Unit1.cpp=D:\Dev\FormEditOpt.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.791,=D:\Dev\Unit1.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.746,D:\Dev\Unit1.h=D:\Dev\FormEditOpt.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.159,D:\Dev\FormEditOpt.cpp=D:\LAFLAS\EditOpt\FormEditOpt.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.240,D:\Dev\EditOpt.cbproj=D:\LAFLAS\EditOpt\EditOpt.cbproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.800,D:\Dev\Project1.cbproj=D:\Dev\EditOpt.cbproj</Transaction>
   </Transactions>
 </BorlandProject>
