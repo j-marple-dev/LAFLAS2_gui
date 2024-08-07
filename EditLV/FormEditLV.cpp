@@ -81,7 +81,7 @@ void __fastcall TEditLVForm::FormCreate(TObject *Sender)
   PhaseInfoSG->Cells[0][2]  = "Phase Type     {R| }";
   PhaseInfoSG->Cells[0][3]  = "Phase Sequence {P| }";
   PhaseSG->ColWidths[0] = 300;
-  PhaseSG->ColWidths[1] = 150;
+  PhaseSG->ColWidths[1] = 100;
   PhaseSG->Cells[0][0]  = "Id.";
   PhaseSG->Cells[0][1]  = "End Time [sec]";
   PhaseSG->Cells[0][2]  = "Use Aerodynamics {0|1}";
@@ -95,34 +95,7 @@ void __fastcall TEditLVForm::FormCreate(TObject *Sender)
   PhaseSG->Cells[0][10] = "  {Yaw_e | Beta_e}    [deg]";
   PhaseSG->Cells[0][11] = "Number of Grids";
 }
-//---------------------------------------------------------------------------
-void __fastcall TEditLVForm::FixMassAddButtonClick(TObject *Sender)
-{
-  FixMassSG->ColCount += 1;
-  FixMassSG->ColWidths[FixMassSG->ColCount - 1] = 150;
-}
-//---------------------------------------------------------------------------
-void __fastcall TEditLVForm::FixMassDelButtonClick(TObject *Sender)
-{
-  if (FixMassSG->ColCount == 1) {
-	return;
-  }
-  FixMassSG->ColCount -= 1;
-}
-//---------------------------------------------------------------------------
-void __fastcall TEditLVForm::VarMassAddButtonClick(TObject *Sender)
-{
-  VarMassSG->ColCount += 1;
-  VarMassSG->ColWidths[VarMassSG->ColCount - 1] = 200;
-}
-//---------------------------------------------------------------------------
-void __fastcall TEditLVForm::VarMassDelButtonClick(TObject *Sender)
-{
-  if (VarMassSG->ColCount == 1) {
-	return;
-  }
-  VarMassSG->ColCount -= 1;
-}
+
 //---------------------------------------------------------------------------
 void __fastcall TEditLVForm::AddThrustButtonClick(TObject *Sender)
 {
@@ -200,22 +173,6 @@ void __fastcall TEditLVForm::AddSFButtonClick(TObject *Sender)
 void __fastcall TEditLVForm::DelSFButtonClick(TObject *Sender)
 {
   SideForceSG->RowCount -= 1;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TEditLVForm::PhaseAddButtonClick(TObject *Sender)
-{
-  PhaseSG->ColCount += 1;
-  PhaseSG->ColWidths[PhaseSG->ColCount - 1] = 150;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TEditLVForm::PhaseDelButtonClick(TObject *Sender)
-{
-  if (PhaseSG->ColCount == 1) {
-	return;
-  }
-  PhaseSG->ColCount     -= 1;
 }
 //---------------------------------------------------------------------------
 
@@ -649,7 +606,7 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 
   phaseSG->ColCount = phaseCount + 1;
   for (int i = 1; i <= phaseCount; i++) {
-	phaseSG->ColWidths[i] = 150;
+	phaseSG->ColWidths[i] = 100;
 
 	getline(inFile, line);
 	phaseSG->Cells[i][0] = line.c_str();
@@ -768,6 +725,78 @@ void __fastcall TEditLVForm::LoadButtonClick(TObject *Sender)
 void __fastcall TEditLVForm::FormResize(TObject *Sender)
 {
   PhaseSG->Width = PhaseInfoSG->Width; //this->ClientWidth - 20;
+}
+//---------------------------------------------------------------------------
+
+
+static TStringGrid *CommonSG;
+
+void __fastcall TEditLVForm::CommonAddClick(TObject *Sender)
+{
+  int curCol = CommonSG->Tag;
+
+  CommonSG->ColCount += 1;
+  CommonSG->ColWidths[CommonSG->ColCount - 1] = CommonSG->ColWidths[1];
+
+  if (curCol == CommonSG->ColCount - 1) {
+	return;
+  }
+
+  for (int i = CommonSG->ColCount - 1; i > curCol + 1; i--) {
+	for (int j = 0; j < CommonSG->RowCount; j++) {
+	  CommonSG->Cells[i][j] = CommonSG->Cells[i-1][j];
+	}
+  }
+
+  for (int j = 0; j < CommonSG->RowCount; j++) {
+	CommonSG->Cells[curCol+1][j] = "";
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::CommonDelClick(TObject *Sender)
+{
+  int curCol = CommonSG->Tag;
+
+  if (curCol == 0) {
+	return;
+  }
+  if (curCol == 1 && CommonSG->ColCount == 2) {
+	for (int j = 0; j < CommonSG->RowCount; j++) {
+	  CommonSG->Cells[curCol][j] = "";
+	}
+	return;
+  }
+
+
+  for (int i = curCol; i < CommonSG->ColCount - 1; i++) {
+	for (int j = 0; j < CommonSG->RowCount; j++)	{
+	  CommonSG->Cells[i][j] = CommonSG->Cells[i+1][j];
+	}
+  }
+  CommonSG->ColCount -= 1;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::CommonSGMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y)
+{
+  TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
+
+  if (Button == mbRight) {
+	int ACol, ARow;
+	grid->MouseToCell(X, Y, ACol, ARow);
+
+	if (ACol == -1 || ARow == -1) {
+	  return;
+	}
+
+	CommonSG = grid;
+	CommonSG->Tag = ACol;
+
+	TPoint point = CommonSG->ClientToScreen(Point(X, Y));
+	CommonPopupMenu->Popup(point.x, point.y);
+  }
 }
 //---------------------------------------------------------------------------
 
