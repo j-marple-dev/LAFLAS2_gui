@@ -51,7 +51,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseUp = CommonSGMouseUp
@@ -79,7 +79,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = VarMassSGMouseMove
@@ -121,9 +121,10 @@ object EditLVForm: TEditLVForm
       ImageIndex = 2
       object AxialForceSG: TStringGrid
         Left = 0
-        Top = 80
+        Top = 81
         Width = 823
-        Height = 185
+        Height = 195
+        Align = alClient
         ColCount = 2
         RowCount = 1
         FixedRows = 0
@@ -132,15 +133,20 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
+        OnMouseUp = CommonAeroSGMouseUp
+        ExplicitLeft = -3
+        ExplicitTop = 5
+        ExplicitHeight = 191
       end
       object NormalForceSG: TStringGrid
         Left = 0
-        Top = 317
+        Top = 322
         Width = 823
         Height = 122
+        Align = alBottom
         ColCount = 2
         RowCount = 1
         FixedRows = 0
@@ -149,51 +155,18 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 1
-      end
-      object AerodynamicAddButton: TButton
-        Left = 651
-        Top = 622
-        Width = 75
-        Height = 25
-        Caption = 'Add'
-        TabOrder = 2
-        OnClick = AerodynamicAddButtonClick
-      end
-      object AerodynamicDelButton: TButton
-        Left = 745
-        Top = 622
-        Width = 75
-        Height = 25
-        Caption = 'Delete'
-        TabOrder = 3
-        OnClick = AerodynamicDelButtonClick
-      end
-      object AddSFButton: TButton
-        Left = 11
-        Top = 607
-        Width = 75
-        Height = 25
-        Caption = 'Add side'
-        TabOrder = 4
-        OnClick = AddSFButtonClick
-      end
-      object DelSFButton: TButton
-        Left = 100
-        Top = 607
-        Width = 75
-        Height = 25
-        Caption = 'Delete side'
-        TabOrder = 5
-        OnClick = DelSFButtonClick
+        OnMouseUp = CommonAeroSGMouseUp
+        ExplicitTop = 84
       end
       object SideForceSG: TStringGrid
         Left = 0
-        Top = 487
+        Top = 490
         Width = 823
         Height = 114
+        Align = alBottom
         ColCount = 2
         RowCount = 1
         FixedRows = 0
@@ -202,51 +175,17 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
-        TabOrder = 6
-      end
-      object AddNFButton: TButton
-        Left = 11
-        Top = 445
-        Width = 75
-        Height = 25
-        Caption = 'Add normal'
-        TabOrder = 7
-        OnClick = AddNFButtonClick
-      end
-      object DelNFButton: TButton
-        Left = 100
-        Top = 445
-        Width = 75
-        Height = 25
-        Caption = 'Del normal'
-        TabOrder = 8
-        OnClick = DelNFButtonClick
-      end
-      object AddAFButton: TButton
-        Left = 11
-        Top = 271
-        Width = 75
-        Height = 25
-        Caption = 'Add axial'
-        TabOrder = 9
-        OnClick = AddAFButtonClick
-      end
-      object DelAFButton: TButton
-        Left = 92
-        Top = 271
-        Width = 75
-        Height = 25
-        Caption = 'Delete axial'
-        TabOrder = 10
-        OnClick = DelAFButtonClick
+        TabOrder = 2
+        OnMouseUp = CommonAeroSGMouseUp
+        ExplicitTop = 498
       end
       object AerodynamicSG: TStringGrid
         Left = 0
         Top = 0
         Width = 823
-        Height = 57
+        Height = 58
         Align = alTop
         ColCount = 2
         RowCount = 2
@@ -256,9 +195,101 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
-        TabOrder = 11
+        TabOrder = 3
+        OnMouseUp = CommonAeroSGMouseUp
+      end
+      object Panel2: TPanel
+        Left = 0
+        Top = 604
+        Width = 823
+        Height = 46
+        Align = alBottom
+        TabOrder = 4
+        VerticalAlignment = taAlignTop
+        ExplicitTop = 609
+        object AddSFButton: TButton
+          Left = 0
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Add side'
+          TabOrder = 0
+          OnClick = AddSFButtonClick
+        end
+        object DelSFButton: TButton
+          Left = 116
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Delete side'
+          TabOrder = 1
+          OnClick = DelSFButtonClick
+        end
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 444
+        Width = 823
+        Height = 46
+        Align = alBottom
+        TabOrder = 5
+        ExplicitTop = 445
+        object AddNFButton: TButton
+          Left = 1
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Add normal'
+          TabOrder = 0
+          OnClick = AddNFButtonClick
+        end
+        object DelNFButton: TButton
+          Left = 117
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Del normal'
+          TabOrder = 1
+          OnClick = DelNFButtonClick
+        end
+      end
+      object Panel5: TPanel
+        Left = 0
+        Top = 276
+        Width = 823
+        Height = 46
+        Align = alBottom
+        TabOrder = 6
+        ExplicitTop = 270
+        object DelAFButton: TButton
+          Left = 116
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Delete axial'
+          TabOrder = 0
+          OnClick = DelAFButtonClick
+        end
+        object AddAFButton: TButton
+          Left = 3
+          Top = 3
+          Width = 100
+          Height = 25
+          Caption = 'Add axial'
+          TabOrder = 1
+          OnClick = AddAFButtonClick
+        end
+      end
+      object Panel6: TPanel
+        Left = 0
+        Top = 58
+        Width = 823
+        Height = 23
+        Align = alTop
+        TabOrder = 7
+        ExplicitTop = 59
       end
     end
     object PhaseTab: TTabSheet
@@ -266,13 +297,14 @@ object EditLVForm: TEditLVForm
       ImageIndex = 3
       object PhaseSG: TStringGrid
         Left = 0
-        Top = 128
+        Top = 129
         Width = 823
-        Height = 481
+        Height = 521
         Hint = 
           'p : pitch_s, pitch_e, yaw_s, yaw_e'#13#10'q : pitch_s, pitch_e, yaw_s'#13 +
           #10'r : pitch_s, yaw_s'#13#10'i : pitch_e, yaw_e'#13#10's : pitch_s, yaw_s, yaw' +
           '_e'#13#10'g : yaw_s, yaw_e'#13#10#13#10'a : alpha_s, alpha_e, beta_s, beta_e'
+        Align = alClient
         ColCount = 2
         RowCount = 12
         FixedRows = 0
@@ -281,7 +313,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
@@ -289,6 +321,9 @@ object EditLVForm: TEditLVForm
         OnMouseMove = PhaseSGMouseMove
         OnMouseUp = CommonSGMouseUp
         OnSelectCell = PhaseSGSelectCell
+        ExplicitLeft = 3
+        ExplicitTop = 176
+        ExplicitHeight = 481
       end
       object PhaseInfoSG: TStringGrid
         Left = 0
@@ -308,12 +343,20 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
         TabOrder = 1
         ExplicitWidth = 817
+      end
+      object Panel4: TPanel
+        Left = 0
+        Top = 106
+        Width = 823
+        Height = 23
+        Align = alTop
+        TabOrder = 2
       end
     end
     object EnvironmentsTab: TTabSheet
@@ -336,7 +379,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = EnvironmentsSGMouseMove
@@ -359,7 +402,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
       end
@@ -387,7 +430,7 @@ object EditLVForm: TEditLVForm
       OnClick = LoadButtonClick
     end
     object SaveButton: TButton
-      Left = 416
+      Left = 424
       Top = 9
       Width = 75
       Height = 25
@@ -414,6 +457,18 @@ object EditLVForm: TEditLVForm
     object DelFixMass: TMenuItem
       Caption = 'Delete Column'
       OnClick = CommonDelClick
+    end
+  end
+  object AerodynamicPopup: TPopupMenu
+    Left = 680
+    Top = 680
+    object AddColumn1: TMenuItem
+      Caption = 'Add Column'
+      OnClick = AerodynamicAddClick
+    end
+    object DeleteColumn1: TMenuItem
+      Caption = 'Delete Column'
+      OnClick = AerodynamicDelClick
     end
   end
 end
