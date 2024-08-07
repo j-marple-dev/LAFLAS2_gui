@@ -80,20 +80,19 @@ void __fastcall TEditLVForm::FormCreate(TObject *Sender)
   PhaseInfoSG->Cells[0][1]  = "IIP Rate";
   PhaseInfoSG->Cells[0][2]  = "Phase Type     {R| }";
   PhaseInfoSG->Cells[0][3]  = "Phase Sequence {P| }";
-  PhaseSG->ColWidths[0] = 300;
-  PhaseSG->ColWidths[1] = 100;
-  PhaseSG->Cells[0][0]  = "Id.";
-  PhaseSG->Cells[0][1]  = "End Time [sec]";
-  PhaseSG->Cells[0][2]  = "Use Aerodynamics {0|1}";
-  PhaseSG->Cells[0][3]  = "FixMass Attatched Flags";
-  PhaseSG->Cells[0][4]  = "VarMass Attatched Flags";
-  PhaseSG->Cells[0][5]  = "VarMass Active Flags";
-  PhaseSG->Cells[0][6]  = "Control Type {p|q|r|i|s|g|a}";
-  PhaseSG->Cells[0][7]  = "  {Pitch_s | Alpha_s} [deg]";
-  PhaseSG->Cells[0][8]  = "  {Pitch_e | Alpha_e} [deg]";
-  PhaseSG->Cells[0][9]  = "  {Yaw_s | Beta_s}    [deg]";
-  PhaseSG->Cells[0][10] = "  {Yaw_e | Beta_e}    [deg]";
-  PhaseSG->Cells[0][11] = "Number of Grids";
+
+  PhaseSG->ColWidths[0]  = 200;  PhaseSG->Cells[0][0]  = "Id";                 PhaseSG->Cells[0][1]  = " ";
+  PhaseSG->ColWidths[1]  = 120;  PhaseSG->Cells[1][0]  = "End Time";           PhaseSG->Cells[1][1]  = "[sec]";
+  PhaseSG->ColWidths[2]  = 180;  PhaseSG->Cells[2][0]  = "Aerodynamic Flag";   PhaseSG->Cells[2][1]  = "[0 | 1]";
+  PhaseSG->ColWidths[3]  = 180;  PhaseSG->Cells[3][0]  = "FixMass Attatched";  PhaseSG->Cells[3][1]  = "[0|1]+(,[0|1]+)*";
+  PhaseSG->ColWidths[4]  = 180;  PhaseSG->Cells[4][0]  = "VarMass Attatched";  PhaseSG->Cells[4][1]  = "[0|1]+(,[0|1]+)*";
+  PhaseSG->ColWidths[5]  = 150;  PhaseSG->Cells[5][0]  = "VarMass Active";     PhaseSG->Cells[5][1]  = "[0|1]+(,[0|1]+)*";
+  PhaseSG->ColWidths[6]  = 120;  PhaseSG->Cells[6][0]  = "Control Type";       PhaseSG->Cells[6][1]  = "[p|q|r|i|s|g|a]";
+  PhaseSG->ColWidths[7]  = 150;  PhaseSG->Cells[7][0]  = "Pitch_s | Alpha_s";  PhaseSG->Cells[7][1]  = "[deg]";
+  PhaseSG->ColWidths[8]  = 150;  PhaseSG->Cells[8][0]  = "Pitch_e | Alpha_e";  PhaseSG->Cells[8][1]  = "[deg]";
+  PhaseSG->ColWidths[9]  = 150;  PhaseSG->Cells[9][0]  = "Yaw_s | Beta_s";     PhaseSG->Cells[9][1]  = "[deg]";
+  PhaseSG->ColWidths[10] = 150;  PhaseSG->Cells[10][0] = "Yaw_e | Beta_e";     PhaseSG->Cells[10][1] = "[deg]";
+  PhaseSG->ColWidths[11] = 120;  PhaseSG->Cells[11][0] = "Grid Number";
 }
 
 //---------------------------------------------------------------------------
@@ -153,6 +152,7 @@ void __fastcall TEditLVForm::DelSFButtonClick(TObject *Sender)
 
 void __fastcall TEditLVForm::MainPageControlChange(TObject *Sender)
 {
+/*
   String phaseSG_Cells03 = "FixMass Attatched Flags";
   String phaseSG_Cells04 = "VarMass Attatched Flags";
   String phaseSG_Cells05 = "VarMass Active Flags";
@@ -165,6 +165,7 @@ void __fastcall TEditLVForm::MainPageControlChange(TObject *Sender)
 	PhaseSG->Cells[0][4] = phaseSG_Cells04 + " : " + IntToStr(VarMassSG->ColCount - 1);
 	PhaseSG->Cells[0][5] = phaseSG_Cells05 + " : " + IntToStr(VarMassSG->ColCount - 1);
   }
+*/
 }
 //---------------------------------------------------------------------------
 
@@ -174,7 +175,7 @@ void __fastcall TEditLVForm::PhaseSGMouseMove(TObject *Sender, TShiftState Shift
   int ACol, ARow;
 
   PhaseSG->MouseToCell(X, Y, ACol, ARow);
-  if (ARow == 6) {
+  if (ACol == 6) {
 	PhaseSG->ShowHint = true;
   } else {
 	PhaseSG->ShowHint = false;
@@ -354,31 +355,31 @@ void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 	outFile << "#" << endl;
 
 	outFile << "P" << endl;
-	outFile << to_string(PhaseSG->ColCount - 1) << " ";   // #phase
+	outFile << to_string(PhaseSG->RowCount - 1) << " ";   // #phase
 	outFile << tostr(PhaseInfoSG->Cells[1][0])  << " ";   // phase iip
 	outFile << tostr(PhaseInfoSG->Cells[1][1])  << endl;  // iIIP rate
 	outFile << tostr(PhaseInfoSG->Cells[1][2])  << endl;  // phase type
 	outFile << tostr(PhaseInfoSG->Cells[1][3])  << endl;  // phase seq
 	string flags;
-	for (int i = 1; i <= PhaseSG->ColCount - 1; i++) {
-	  outFile << tostr(PhaseSG->Cells[i][0]) << endl;     // id
-	  outFile << tostr(PhaseSG->Cells[i][1]) << endl;     // end time
-	  outFile << tostr(PhaseSG->Cells[i][2]) << endl;     // use a/d coeff.
-	  flags = tostr(PhaseSG->Cells[i][3]);                // fix mass flags
+	for (int i = 2; i <= PhaseSG->RowCount - 1; i++) {
+	  outFile << tostr(PhaseSG->Cells[0][i]) << endl;     // id
+	  outFile << tostr(PhaseSG->Cells[1][i]) << endl;     // end time
+	  outFile << tostr(PhaseSG->Cells[2][i]) << endl;     // use a/d coeff.
+	  flags = tostr(PhaseSG->Cells[3][i]);                // fix mass flags
 	  replace(flags.begin(), flags.end(), ',', ' ');
 	  outFile << flags << endl;
-	  flags = tostr(PhaseSG->Cells[i][4]);                // var mass flags
+	  flags = tostr(PhaseSG->Cells[4][i]);                // var mass flags
 	  replace(flags.begin(), flags.end(), ',', ' ');
 	  outFile << flags << endl;
-	  flags = tostr(PhaseSG->Cells[i][5]);                // var mass active
+	  flags = tostr(PhaseSG->Cells[5][i]);                // var mass active
 	  replace(flags.begin(), flags.end(), ',', ' ');
 	  outFile << flags << endl;
-	  outFile << tostr(PhaseSG->Cells[i][6]) << endl;      // control type
-	  outFile << tostr(PhaseSG->Cells[i][7])  << " ";
-	  outFile << tostr(PhaseSG->Cells[i][8])  << endl;
-	  outFile << tostr(PhaseSG->Cells[i][9])  << " ";
-	  outFile << tostr(PhaseSG->Cells[i][10]) << endl;
-	  outFile << tostr(PhaseSG->Cells[i][11]) << endl;     // #grid
+	  outFile << tostr(PhaseSG->Cells[6][i])  << endl;    // control type
+	  outFile << tostr(PhaseSG->Cells[7][i])  << " ";
+	  outFile << tostr(PhaseSG->Cells[8][i])  << endl;
+	  outFile << tostr(PhaseSG->Cells[9][i])  << " ";
+	  outFile << tostr(PhaseSG->Cells[10][i]) << endl;
+	  outFile << tostr(PhaseSG->Cells[11][i]) << endl;    // #grid
 	}
 	outFile << "#" << endl;
 	outFile << "E";
@@ -583,18 +584,18 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
   getline(inFile, line);
   infoSG->Cells[1][3] = line.c_str();    // phase sequence
 
-  phaseSG->ColCount = phaseCount + 1;
-  for (int i = 1; i <= phaseCount; i++) {
-	phaseSG->ColWidths[i] = 100;
+  phaseSG->RowCount = phaseCount + 2;
+  for (int i = 2; i <= phaseCount; i++) {
+	//phaseSG->ColWidths[i] = 100;
 
 	getline(inFile, line);
-	phaseSG->Cells[i][0] = line.c_str();
+	phaseSG->Cells[0][i] = line.c_str();
 
 	getline(inFile, line);
-	phaseSG->Cells[i][1] = line.c_str();
+	phaseSG->Cells[1][i] = line.c_str();
 
 	getline(inFile, line);
-	phaseSG->Cells[i][2] = line.c_str();
+	phaseSG->Cells[2][i] = line.c_str();
 
 	getline(inFile, line);                           // fixmass attatched flags
 	stringstream ss3(line);
@@ -605,7 +606,7 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 	  }
 	  result3 += str1;
 	}
-	phaseSG->Cells[i][3] = result3.c_str();
+	phaseSG->Cells[3][i] = result3.c_str();
 
 	getline(inFile, line);
 	stringstream ss4(line);
@@ -616,7 +617,7 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 	  }
 	  result4 += str1;
 	}
-	phaseSG->Cells[i][4] = result4.c_str();
+	phaseSG->Cells[4][i] = result4.c_str();
 
 	getline(inFile, line);
 	stringstream ss5(line);
@@ -627,16 +628,16 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 	  }
 	  result5 += str1;
 	}
-	phaseSG->Cells[i][5] = result5.c_str();
+	phaseSG->Cells[5][i] = result5.c_str();
 
 	getline(inFile, line);
-	phaseSG->Cells[i][6] = line.c_str();
+	phaseSG->Cells[6][i] = line.c_str();
 
 	getline(inFile, line);
 	istringstream ss7(line);
 	int j = 7;
 	while (ss7 >> str1) {
-	  phaseSG->Cells[i][j] = str1.c_str();
+	  phaseSG->Cells[j][i] = str1.c_str();
 	  j++;
 	}
 
@@ -644,21 +645,13 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 	istringstream ss9(line);
 	j = 9;
 	while (ss9 >> str1) {
-	  phaseSG->Cells[i][j] = str1.c_str();
+	  phaseSG->Cells[j][i] = str1.c_str();
 	  j++;
 	}
 
 	getline(inFile, line);
-	phaseSG->Cells[i][11] = line.c_str();
+	phaseSG->Cells[11][i] = line.c_str();
   }
-
-/*
-  PhaseSG->Cells[0][7]  = "  {Pitch_s | Alpha_s} [deg]";
-  PhaseSG->Cells[0][8]  = "  {Pitch_e | Alpha_e} [deg]";
-  PhaseSG->Cells[0][9]  = "  {Yaw_s | Beta_s}    [deg]";
-  PhaseSG->Cells[0][10] = "  {Yaw_e | Beta_e}    [deg]";
-  PhaseSG->Cells[0][11] = "Number of Grids";
-*/
 }
 
 void __fastcall TEditLVForm::LoadButtonClick(TObject *Sender)
@@ -844,6 +837,72 @@ void __fastcall TEditLVForm::CommonAeroSGMouseUp(TObject *Sender, TMouseButton B
 	TPoint point = CommonAeroSG->ClientToScreen(Point(X, Y));
 	AerodynamicPopup->Popup(point.x, point.y);
   }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::PhaseSGMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y)
+{
+  if (Button == mbRight) {
+	int ACol, ARow;
+	PhaseSG->MouseToCell(X, Y, ACol, ARow);
+
+	if (ACol == -1 || ARow == -1 || ARow == 0) {
+	  return;
+	}
+
+	PhaseSG->Tag = ARow;
+
+	TPoint point = PhaseSG->ClientToScreen(Point(X, Y));
+	PhasePopup->Popup(point.x, point.y);
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::AddPhaseClick(TObject *Sender)
+{
+  int curRow = PhaseSG->Tag;
+
+
+  PhaseSG->RowCount += 1;
+
+  if (curRow == PhaseSG->RowCount - 1) {
+	return;
+  }
+
+  for (int i = PhaseSG->RowCount - 1; i > curRow+1; i--) {
+	for (int j = 0; j < PhaseSG->ColCount; j++) {
+	  PhaseSG->Cells[j][i] = PhaseSG->Cells[j][i-1];
+	}
+  }
+
+  for (int j = 0; j < PhaseSG->ColCount; j++) {
+	PhaseSG->Cells[j][curRow+1] = "";
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::DelPhaseClick(TObject *Sender)
+{
+  int curRow = PhaseSG->Tag;
+
+  if (curRow == 0 || curRow == 1) {
+	return;
+  }
+  if (curRow == 2 && PhaseSG->RowCount == 3) {
+	for (int j = 0; j < PhaseSG->ColCount; j++) {
+	  PhaseSG->Cells[j][curRow] = "";
+	}
+	return;
+  }
+
+
+  for (int i = curRow; i < PhaseSG->RowCount - 1; i++) {
+	for (int j = 0; j < PhaseSG->ColCount; j++)	{
+	  PhaseSG->Cells[j][i] = PhaseSG->Cells[j][i+1];
+	}
+  }
+  PhaseSG->RowCount -= 1;
 }
 //---------------------------------------------------------------------------
 
