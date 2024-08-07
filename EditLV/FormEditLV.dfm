@@ -22,7 +22,7 @@ object EditLVForm: TEditLVForm
     Margins.Top = 10
     Margins.Right = 10
     Margins.Bottom = 10
-    ActivePage = PhaseTab
+    ActivePage = VarMassTab
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -63,12 +63,20 @@ object EditLVForm: TEditLVForm
     object VarMassTab: TTabSheet
       Caption = 'Variable mass'
       ImageIndex = 1
+      object Label1: TLabel
+        Left = 630
+        Top = 563
+        Width = 190
+        Height = 45
+        Caption = 
+          'Thrust Description Type:'#13#10'    T : Thrust [ton]'#13#10'    M : Mass con' +
+          'sumption rate [kg/s]'
+      end
       object VarMassSG: TStringGrid
         Left = 0
         Top = 0
         Width = 823
-        Height = 601
-        Hint = 'T : Thrust [ton]'#13#10'M : Mass consumption rate [kg/s]'
+        Height = 553
         Align = alTop
         ColCount = 2
         FixedColor = clGray
@@ -99,19 +107,19 @@ object EditLVForm: TEditLVForm
       end
       object AddThrustButton: TButton
         Left = 3
-        Top = 607
-        Width = 100
+        Top = 559
+        Width = 150
         Height = 25
-        Caption = 'Add Thrust'
+        Caption = 'Add Thrust Profile'
         TabOrder = 1
         OnClick = AddThrustButtonClick
       end
       object DelThrustButton: TButton
-        Left = 117
-        Top = 607
-        Width = 100
+        Left = 173
+        Top = 559
+        Width = 150
         Height = 25
-        Caption = 'Delete Thrust'
+        Caption = 'Delete Thrust Profile'
         TabOrder = 2
         OnClick = DelThrustButtonClick
       end
@@ -137,9 +145,8 @@ object EditLVForm: TEditLVForm
         ParentFont = False
         TabOrder = 0
         OnMouseUp = CommonAeroSGMouseUp
-        ExplicitLeft = -3
-        ExplicitTop = 5
-        ExplicitHeight = 191
+        ExplicitWidth = 817
+        ExplicitHeight = 178
       end
       object NormalForceSG: TStringGrid
         Left = 0
@@ -159,7 +166,8 @@ object EditLVForm: TEditLVForm
         ParentFont = False
         TabOrder = 1
         OnMouseUp = CommonAeroSGMouseUp
-        ExplicitTop = 84
+        ExplicitTop = 305
+        ExplicitWidth = 817
       end
       object SideForceSG: TStringGrid
         Left = 0
@@ -179,7 +187,8 @@ object EditLVForm: TEditLVForm
         ParentFont = False
         TabOrder = 2
         OnMouseUp = CommonAeroSGMouseUp
-        ExplicitTop = 498
+        ExplicitTop = 473
+        ExplicitWidth = 817
       end
       object AerodynamicSG: TStringGrid
         Left = 0
@@ -199,6 +208,7 @@ object EditLVForm: TEditLVForm
         ParentFont = False
         TabOrder = 3
         OnMouseUp = CommonAeroSGMouseUp
+        ExplicitWidth = 817
       end
       object Panel2: TPanel
         Left = 0
@@ -208,7 +218,8 @@ object EditLVForm: TEditLVForm
         Align = alBottom
         TabOrder = 4
         VerticalAlignment = taAlignTop
-        ExplicitTop = 609
+        ExplicitTop = 587
+        ExplicitWidth = 817
         object AddSFButton: TButton
           Left = 0
           Top = 3
@@ -235,7 +246,8 @@ object EditLVForm: TEditLVForm
         Height = 46
         Align = alBottom
         TabOrder = 5
-        ExplicitTop = 445
+        ExplicitTop = 427
+        ExplicitWidth = 817
         object AddNFButton: TButton
           Left = 0
           Top = 3
@@ -262,7 +274,8 @@ object EditLVForm: TEditLVForm
         Height = 46
         Align = alBottom
         TabOrder = 6
-        ExplicitTop = 270
+        ExplicitTop = 259
+        ExplicitWidth = 817
         object DelAFButton: TButton
           Left = 116
           Top = 3
@@ -289,7 +302,7 @@ object EditLVForm: TEditLVForm
         Height = 23
         Align = alTop
         TabOrder = 7
-        ExplicitTop = 59
+        ExplicitWidth = 817
       end
     end
     object PhaseTab: TTabSheet
@@ -322,9 +335,6 @@ object EditLVForm: TEditLVForm
         OnMouseMove = PhaseSGMouseMove
         OnMouseUp = PhaseSGMouseUp
         OnSelectCell = PhaseSGSelectCell
-        ExplicitLeft = 3
-        ExplicitTop = 176
-        ExplicitHeight = 481
       end
       object PhaseInfoSG: TStringGrid
         Left = 0
@@ -349,7 +359,6 @@ object EditLVForm: TEditLVForm
         ParentShowHint = False
         ShowHint = False
         TabOrder = 1
-        ExplicitWidth = 817
       end
       object Panel4: TPanel
         Left = 0
@@ -419,6 +428,7 @@ object EditLVForm: TEditLVForm
     Color = clGrayText
     ParentBackground = False
     TabOrder = 1
+    OnResize = Panel1Resize
     ExplicitTop = 663
     ExplicitWidth = 825
     object LoadButton: TButton
@@ -448,14 +458,14 @@ object EditLVForm: TEditLVForm
     Left = 520
     Top = 680
   end
-  object CommonPopupMenu: TPopupMenu
+  object CommonPopup: TPopupMenu
     Left = 608
     Top = 680
-    object AddFixMass: TMenuItem
+    object AddColumn: TMenuItem
       Caption = 'Add Column'
       OnClick = CommonAddClick
     end
-    object DelFixMass: TMenuItem
+    object DelColumn: TMenuItem
       Caption = 'Delete Column'
       OnClick = CommonDelClick
     end
