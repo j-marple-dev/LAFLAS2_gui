@@ -51,7 +51,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseUp = CommonSGMouseUp
@@ -79,7 +79,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = VarMassSGMouseMove
@@ -133,7 +133,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseUp = CommonAeroSGMouseUp
@@ -155,7 +155,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 1
         OnMouseUp = CommonAeroSGMouseUp
@@ -175,7 +175,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 2
         OnMouseUp = CommonAeroSGMouseUp
@@ -195,7 +195,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goDrawFocusSelected, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 3
         OnMouseUp = CommonAeroSGMouseUp
@@ -237,7 +237,7 @@ object EditLVForm: TEditLVForm
         TabOrder = 5
         ExplicitTop = 445
         object AddNFButton: TButton
-          Left = 1
+          Left = 0
           Top = 3
           Width = 100
           Height = 25
@@ -273,7 +273,7 @@ object EditLVForm: TEditLVForm
           OnClick = DelAFButtonClick
         end
         object AddAFButton: TButton
-          Left = 3
+          Left = 0
           Top = 3
           Width = 100
           Height = 25
@@ -297,29 +297,30 @@ object EditLVForm: TEditLVForm
       ImageIndex = 3
       object PhaseSG: TStringGrid
         Left = 0
-        Top = 129
+        Top = 121
         Width = 823
-        Height = 521
+        Height = 529
         Hint = 
           'p : pitch_s, pitch_e, yaw_s, yaw_e'#13#10'q : pitch_s, pitch_e, yaw_s'#13 +
           #10'r : pitch_s, yaw_s'#13#10'i : pitch_e, yaw_e'#13#10's : pitch_s, yaw_s, yaw' +
           '_e'#13#10'g : yaw_s, yaw_e'#13#10#13#10'a : alpha_s, alpha_e, beta_s, beta_e'
         Align = alClient
-        ColCount = 2
-        RowCount = 12
-        FixedRows = 0
+        ColCount = 12
+        FixedCols = 0
+        RowCount = 3
+        FixedRows = 2
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
         TabOrder = 0
         OnMouseMove = PhaseSGMouseMove
-        OnMouseUp = CommonSGMouseUp
+        OnMouseUp = PhaseSGMouseUp
         OnSelectCell = PhaseSGSelectCell
         ExplicitLeft = 3
         ExplicitTop = 176
@@ -343,7 +344,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
@@ -354,7 +355,7 @@ object EditLVForm: TEditLVForm
         Left = 0
         Top = 106
         Width = 823
-        Height = 23
+        Height = 15
         Align = alTop
         TabOrder = 2
       end
@@ -379,7 +380,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = EnvironmentsSGMouseMove
@@ -402,7 +403,7 @@ object EditLVForm: TEditLVForm
         Font.Height = -12
         Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goAlwaysShowEditor, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
       end
@@ -469,6 +470,18 @@ object EditLVForm: TEditLVForm
     object DeleteColumn1: TMenuItem
       Caption = 'Delete Column'
       OnClick = AerodynamicDelClick
+    end
+  end
+  object PhasePopup: TPopupMenu
+    Left = 736
+    Top = 680
+    object AddPhase: TMenuItem
+      Caption = 'Add Phase'
+      OnClick = AddPhaseClick
+    end
+    object DelPhase: TMenuItem
+      Caption = 'Delete Phase'
+      OnClick = DelPhaseClick
     end
   end
 end
