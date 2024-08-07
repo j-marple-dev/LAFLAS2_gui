@@ -11,13 +11,14 @@ object EditLVForm: TEditLVForm
   Font.Name = 'Segoe UI'
   Font.Style = []
   OnCreate = FormCreate
+  OnResize = FormResize
   TextHeight = 15
   object MainPageControl: TPageControl
     Left = 0
     Top = 0
     Width = 831
     Height = 680
-    ActivePage = FixMassTab
+    ActivePage = PhaseTab
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
@@ -27,6 +28,8 @@ object EditLVForm: TEditLVForm
     ParentFont = False
     TabOrder = 0
     OnChange = MainPageControlChange
+    ExplicitWidth = 825
+    ExplicitHeight = 663
     object FixMassTab: TTabSheet
       Caption = 'Fixed mass'
       object FixMassAddButton: TSpeedButton
@@ -426,6 +429,7 @@ object EditLVForm: TEditLVForm
       Height = 25
       Caption = 'Load'
       TabOrder = 0
+      OnClick = LoadButtonClick
     end
     object SaveButton: TButton
       Left = 416
@@ -440,5 +444,9 @@ object EditLVForm: TEditLVForm
   object SaveDialog: TSaveTextFileDialog
     Left = 748
     Top = 666
+  end
+  object OpenDialog: TOpenDialog
+    Left = 696
+    Top = 664
   end
 end
