@@ -61,6 +61,9 @@ __published:	// IDE-managed Components
 	TButton *DelAFButton;
 	TButton *AddAFButton;
 	TPanel *Panel4;
+	TPopupMenu *PhasePopup;
+	TMenuItem *AddPhase;
+	TMenuItem *DelPhase;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall AddThrustButtonClick(TObject *Sender);
 	void __fastcall DelThrustButtonClick(TObject *Sender);
@@ -88,6 +91,11 @@ __published:	// IDE-managed Components
 	void __fastcall AerodynamicDelClick(TObject *Sender);
 	void __fastcall CommonAeroSGMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
+	void __fastcall PhaseSGMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+          int X, int Y);
+	void __fastcall AddPhaseClick(TObject *Sender);
+	void __fastcall DelPhaseClick(TObject *Sender);
+
 
 
 private:	// User declarations
