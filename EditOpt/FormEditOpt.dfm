@@ -1,7 +1,7 @@
 object FormOCF: TFormOCF
   Left = 0
   Top = 0
-  Caption = 'Optimization Configuration Editor'
+  Caption = 'LAFLAS Optimization Config Editor'
   ClientHeight = 722
   ClientWidth = 831
   Color = clBtnFace
@@ -22,6 +22,7 @@ object FormOCF: TFormOCF
     Color = clGrayText
     ParentBackground = False
     TabOrder = 0
+    OnResize = Panel1Resize
     ExplicitTop = 663
     ExplicitWidth = 825
     object LoadButton: TButton
@@ -43,159 +44,160 @@ object FormOCF: TFormOCF
       OnClick = SaveButtonClick
     end
   end
-  object OptParamSG: TStringGrid
+  object PageControl1: TPageControl
     Left = 0
     Top = 0
     Width = 831
-    Height = 113
-    Hint = 
-      'Id  =  0 :     Type = t, n, a, e'#13#10'Id < 100 :   Type = p, y, t'#13#10'I' +
-      'd >= 100 : Type = m'
-    Align = alTop
-    ColCount = 2
-    RowCount = 2
-    FixedRows = 0
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Consolas'
-    Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
-    ParentFont = False
-    ParentShowHint = False
-    ShowHint = True
+    Height = 680
+    ActivePage = TabSheet1
+    Align = alClient
     TabOrder = 1
-    ExplicitWidth = 823
-  end
-  object AddParamButton: TButton
-    Left = 19
-    Top = 119
-    Width = 85
-    Height = 25
-    Caption = 'Add param'
-    TabOrder = 2
-    OnClick = AddParamButtonClick
-  end
-  object DelParamButton: TButton
-    Left = 110
-    Top = 119
-    Width = 85
-    Height = 25
-    Caption = 'Delete param'
-    TabOrder = 3
-    OnClick = DelParamButtonClick
-  end
-  object OptEqCnstrSG: TStringGrid
-    Left = 0
-    Top = 176
-    Width = 831
-    Height = 121
-    ColCount = 2
-    RowCount = 3
-    FixedRows = 0
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Consolas'
-    Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
-    ParentFont = False
-    TabOrder = 4
-  end
-  object AddEqCnstrButton: TButton
-    Left = 19
-    Top = 303
-    Width = 85
-    Height = 25
-    Caption = 'Add EQ cnstr.'
-    TabOrder = 5
-    OnClick = AddEqCnstrButtonClick
-  end
-  object DelEqCnstrButton: TButton
-    Left = 110
-    Top = 303
-    Width = 85
-    Height = 25
-    Caption = 'Delete EQ cnstr.'
-    TabOrder = 6
-    OnClick = DelEqCnstrButtonClick
-  end
-  object OptLbCnstrSG: TStringGrid
-    Left = 8
-    Top = 360
-    Width = 823
-    Height = 113
-    ColCount = 2
-    RowCount = 3
-    FixedRows = 0
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Consolas'
-    Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
-    ParentFont = False
-    TabOrder = 7
-  end
-  object AddLbCnstrButton: TButton
-    Left = 16
-    Top = 479
-    Width = 85
-    Height = 25
-    Caption = 'Add LB cnstr.'
-    TabOrder = 8
-    OnClick = AddLbCnstrButtonClick
-  end
-  object DelLbCnstrButton: TButton
-    Left = 107
-    Top = 479
-    Width = 85
-    Height = 25
-    Caption = 'Del LB cnstr.'
-    TabOrder = 9
-    OnClick = DelLbCnstrButtonClick
-  end
-  object OptUbCnstrSG: TStringGrid
-    Left = 0
-    Top = 528
-    Width = 831
-    Height = 96
-    ColCount = 2
-    RowCount = 3
-    FixedRows = 0
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Consolas'
-    Font.Style = []
-    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
-    ParentFont = False
-    TabOrder = 10
-  end
-  object AddUbCnstrButton: TButton
-    Left = 19
-    Top = 630
-    Width = 85
-    Height = 25
-    Caption = 'Add UB cnstr.'
-    TabOrder = 11
-    OnClick = AddUbCnstrButtonClick
-  end
-  object DelUbCnstrButton: TButton
-    Left = 110
-    Top = 630
-    Width = 85
-    Height = 25
-    Caption = 'Delete UB cnstr.'
-    TabOrder = 12
-    OnClick = DelUbCnstrButtonClick
+    ExplicitWidth = 825
+    ExplicitHeight = 663
+    object TabSheet1: TTabSheet
+      Margins.Left = 10
+      Margins.Top = 10
+      Margins.Right = 10
+      Margins.Bottom = 10
+      object Label1: TLabel
+        Left = 0
+        Top = 113
+        Width = 823
+        Height = 60
+        Margins.Top = 10
+        Margins.Bottom = 10
+        Align = alTop
+        Caption = 
+          '  Id  =  0  : Type = t, n, a, e'#13#10'  Id  < 100 : Type = p, y, t'#13#10' ' +
+          ' Id >= 100 : Type = m'#13#10' '
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Courier New'
+        Font.Style = []
+        ParentFont = False
+        ExplicitWidth = 217
+      end
+      object OptParamSG: TStringGrid
+        Left = 0
+        Top = 0
+        Width = 823
+        Height = 113
+        Align = alTop
+        ColCount = 2
+        RowCount = 2
+        FixedRows = 0
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        ParentFont = False
+        ParentShowHint = False
+        ShowHint = True
+        TabOrder = 0
+        OnMouseUp = OnCommonMouseUp
+        ExplicitWidth = 817
+      end
+      object OptEqCnstrSG: TStringGrid
+        Left = 0
+        Top = 173
+        Width = 823
+        Height = 121
+        Align = alTop
+        ColCount = 2
+        RowCount = 3
+        FixedRows = 0
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        ParentFont = False
+        TabOrder = 1
+        OnMouseUp = OnCommonMouseUp
+        ExplicitWidth = 817
+      end
+      object OptLbCnstrSG: TStringGrid
+        Left = 0
+        Top = 317
+        Width = 823
+        Height = 113
+        Align = alTop
+        ColCount = 2
+        RowCount = 3
+        FixedRows = 0
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        ParentFont = False
+        TabOrder = 2
+        OnMouseUp = OnCommonMouseUp
+        ExplicitWidth = 817
+      end
+      object Panel6: TPanel
+        Left = 0
+        Top = 430
+        Width = 823
+        Height = 23
+        Align = alTop
+        TabOrder = 3
+        ExplicitWidth = 817
+      end
+      object Panel3: TPanel
+        Left = 0
+        Top = 294
+        Width = 823
+        Height = 23
+        Align = alTop
+        TabOrder = 4
+        ExplicitWidth = 817
+      end
+      object OptUbCnstrSG: TStringGrid
+        Left = 0
+        Top = 453
+        Width = 823
+        Height = 96
+        Align = alTop
+        ColCount = 2
+        RowCount = 3
+        FixedRows = 0
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -12
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        ParentFont = False
+        TabOrder = 5
+        OnMouseUp = OnCommonMouseUp
+        ExplicitWidth = 817
+      end
+    end
   end
   object SaveDialog: TSaveDialog
-    Left = 776
-    Top = 640
+    Left = 592
+    Top = 688
   end
   object OpenDialog: TOpenDialog
-    Left = 720
-    Top = 640
+    Left = 536
+    Top = 688
+  end
+  object CommonPopup: TPopupMenu
+    Left = 648
+    Top = 688
+    object AddColumn: TMenuItem
+      Caption = 'Add Column'
+      OnClick = CommonAddClick
+    end
+    object DelColumn: TMenuItem
+      Caption = 'Delete Column'
+      OnClick = CommonDelClick
+    end
   end
 end
