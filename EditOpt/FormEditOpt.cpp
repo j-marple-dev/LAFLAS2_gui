@@ -20,61 +20,7 @@ __fastcall TFormOCF::TFormOCF(TComponent* Owner)
 {
 }
 //---------------------------------------------------------------------------
-void __fastcall TFormOCF::AddParamButtonClick(TObject *Sender)
-{
-  OptParamSG->ColCount += 1;
-  OptParamSG->ColWidths[OptParamSG->ColCount - 1] = 50;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::DelParamButtonClick(TObject *Sender)
-{
-  if (OptParamSG->ColCount == 1) {
-	return;
-  }
-  OptParamSG->ColCount -= 1;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::AddEqCnstrButtonClick(TObject *Sender)
-{
-  OptEqCnstrSG->ColCount += 1;
-  OptEqCnstrSG->ColWidths[OptEqCnstrSG->ColCount - 1] = 60;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::AddLbCnstrButtonClick(TObject *Sender)
-{
-  OptLbCnstrSG->ColCount += 1;
-  OptLbCnstrSG->ColWidths[OptLbCnstrSG->ColCount - 1] = 60;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::DelLbCnstrButtonClick(TObject *Sender)
-{
-  if (OptLbCnstrSG->ColCount == 1) {
-	return;
-  }
-  OptLbCnstrSG->ColCount -= 1;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::AddUbCnstrButtonClick(TObject *Sender)
-{
-  OptUbCnstrSG->ColCount += 1;
-  OptUbCnstrSG->ColWidths[OptUbCnstrSG->ColCount - 1] = 60;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::DelUbCnstrButtonClick(TObject *Sender)
-{
-  if (OptUbCnstrSG->ColCount == 1) {
-	return;
-  }
-  OptUbCnstrSG->ColCount -= 1;
-}
-//---------------------------------------------------------------------------
-void __fastcall TFormOCF::DelEqCnstrButtonClick(TObject *Sender)
-{
-  if (OptEqCnstrSG->ColCount == 1) {
-	return;
-  }
-  OptEqCnstrSG->ColCount -= 1;
-}
+
 
 using namespace std;
 
@@ -87,7 +33,11 @@ string tostr(String str)
 //---------------------------------------------------------------------------
 void __fastcall TFormOCF::SaveButtonClick(TObject *Sender)
 {
-  SaveDialog->Title = "Save Optimization Configuration File";
+  SaveDialog->Title       = "Save Optimization Config File";
+  SaveDialog->Filter      = "OCF File (*.ocf)|*.ocf|LAFLAS 1 File (*.dat)|*.dat";
+  SaveDialog->FilterIndex = 1;
+  SaveDialog->DefaultExt  = "ocf";
+
   if (SaveDialog->Execute()) {
 	String fileName = SaveDialog->FileName;
 
@@ -133,31 +83,34 @@ void __fastcall TFormOCF::FormCreate(TObject *Sender)
 {
   OptParamSG->ColWidths[0] = 60;
   OptParamSG->ColWidths[1] = 50;
-  OptParamSG->Cells[0][0] = "Id.";
+  OptParamSG->Cells[0][0] = "Id";
   OptParamSG->Cells[0][1] = "Type";
 
-  OptEqCnstrSG->ColWidths[0] = 100;
+  OptEqCnstrSG->ColWidths[0] = 150;
   OptEqCnstrSG->ColWidths[1] = 80;
-  OptEqCnstrSG->Cells[0][0] = "Cstr P";
-  OptEqCnstrSG->Cells[0][1] = "Cstr N";
-  OptEqCnstrSG->Cells[0][2] = "Cstr V";
+  OptEqCnstrSG->Cells[0][0] = "Constraint P";
+  OptEqCnstrSG->Cells[0][1] = "Constraint N";
+  OptEqCnstrSG->Cells[0][2] = "Constraint V";
 
-  OptLbCnstrSG->ColWidths[0] = 100;
+  OptLbCnstrSG->ColWidths[0] = 150;
   OptLbCnstrSG->ColWidths[1] = 80;
-  OptLbCnstrSG->Cells[0][0] = "Cstr P";
-  OptLbCnstrSG->Cells[0][1] = "Cstr N";
-  OptLbCnstrSG->Cells[0][2] = "Cstr V";
+  OptLbCnstrSG->Cells[0][0] = "Constraint P";
+  OptLbCnstrSG->Cells[0][1] = "Constraint N";
+  OptLbCnstrSG->Cells[0][2] = "Constraint V";
 
-  OptUbCnstrSG->ColWidths[0] = 100;
+  OptUbCnstrSG->ColWidths[0] = 150;
   OptUbCnstrSG->ColWidths[1] = 80;
-  OptUbCnstrSG->Cells[0][0] = "Cstr P";
-  OptUbCnstrSG->Cells[0][1] = "Cstr N";
-  OptUbCnstrSG->Cells[0][2] = "Cstr V";
+  OptUbCnstrSG->Cells[0][0] = "Constraint P";
+  OptUbCnstrSG->Cells[0][1] = "Constraint N";
+  OptUbCnstrSG->Cells[0][2] = "Constraint V";
 }
 //---------------------------------------------------------------------------
 void __fastcall TFormOCF::LoadButtonClick(TObject *Sender)
 {
-  OpenDialog->Title = "Load Optimization Configuration File";
+  OpenDialog->Title       = "Load Optimization Config File";
+  OpenDialog->Filter      = "OCF File (*.ocf)|*.ocf|LAFLAS 1 File (*.dat)|*.dat";
+  OpenDialog->FilterIndex = 1;
+
   if (OpenDialog->Execute()) {
 	String filePath = OpenDialog->FileName;
 
@@ -270,3 +223,96 @@ void __fastcall TFormOCF::LoadButtonClick(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
+void __fastcall TFormOCF::Panel1Resize(TObject *Sender)
+{
+  int panelCenterX = Panel1->Width / 2;
+  int panelCenterY = Panel1->Height / 2;
+
+  int buttonWidth = LoadButton->Width + SaveButton->Width;
+
+  int spacing = 50;
+
+  int totalWidth = buttonWidth + spacing;
+  int startX = panelCenterX - (totalWidth / 2);
+
+  LoadButton->Left = startX;
+  LoadButton->Top  = panelCenterY - (LoadButton->Height / 2);
+
+  SaveButton->Left = startX + SaveButton->Width + spacing;
+  SaveButton->Top  = panelCenterY - (SaveButton->Height / 2);
+}
+//---------------------------------------------------------------------------
+
+static TStringGrid *CommonSG;
+
+void __fastcall TFormOCF::CommonAddClick(TObject *Sender)
+{
+  int curCol = CommonSG->Tag;
+
+  CommonSG->ColCount += 1;
+  CommonSG->ColWidths[CommonSG->ColCount - 1] = CommonSG->ColWidths[1];
+
+  if (curCol == CommonSG->ColCount - 1) {
+	return;
+  }
+
+  for (int i = CommonSG->ColCount - 1; i > curCol + 1; i--) {
+	for (int j = 0; j < CommonSG->RowCount; j++) {
+	  CommonSG->Cells[i][j] = CommonSG->Cells[i-1][j];
+	}
+  }
+
+  for (int j = 0; j < CommonSG->RowCount; j++) {
+	CommonSG->Cells[curCol+1][j] = "";
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormOCF::CommonDelClick(TObject *Sender)
+{
+  int curCol = CommonSG->Tag;
+
+  if (curCol == 0) {
+	return;
+  }
+  if (curCol == 1 && CommonSG->ColCount == 2) {
+	for (int j = 0; j < CommonSG->RowCount; j++) {
+	  CommonSG->Cells[curCol][j] = "";
+	}
+	return;
+  }
+
+
+  for (int i = curCol; i < CommonSG->ColCount - 1; i++) {
+	for (int j = 0; j < CommonSG->RowCount; j++)	{
+	  CommonSG->Cells[i][j] = CommonSG->Cells[i+1][j];
+	}
+  }
+  CommonSG->ColCount -= 1;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TFormOCF::OnCommonMouseUp(TObject *Sender, TMouseButton Button,
+		  TShiftState Shift, int X, int Y)
+{
+  TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
+
+  if (Button == mbRight) {
+	int ACol, ARow;
+	grid->MouseToCell(X, Y, ACol, ARow);
+
+	if (ACol == -1 || ARow == -1) {
+	  return;
+	}
+
+	CommonSG = grid;
+	CommonSG->Tag = ACol;
+
+	TPoint point = CommonSG->ClientToScreen(Point(X, Y));
+	CommonPopup->Popup(point.x, point.y);
+  }
+}
+//---------------------------------------------------------------------------
+
+
+

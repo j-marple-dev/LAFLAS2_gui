@@ -11,6 +11,7 @@
 #include <Vcl.ExtCtrls.hpp>
 #include <Vcl.Grids.hpp>
 #include <Vcl.Dialogs.hpp>
+#include <Vcl.Menus.hpp>
 //---------------------------------------------------------------------------
 class TFormOCF : public TForm
 {
@@ -18,31 +19,28 @@ __published:	// IDE-managed Components
 	TPanel *Panel1;
 	TButton *LoadButton;
 	TButton *SaveButton;
-	TStringGrid *OptParamSG;
-	TButton *AddParamButton;
-	TButton *DelParamButton;
-	TStringGrid *OptEqCnstrSG;
-	TButton *AddEqCnstrButton;
-	TButton *DelEqCnstrButton;
-	TStringGrid *OptLbCnstrSG;
-	TButton *AddLbCnstrButton;
-	TButton *DelLbCnstrButton;
-	TStringGrid *OptUbCnstrSG;
-	TButton *AddUbCnstrButton;
-	TButton *DelUbCnstrButton;
 	TSaveDialog *SaveDialog;
 	TOpenDialog *OpenDialog;
-	void __fastcall AddParamButtonClick(TObject *Sender);
-	void __fastcall DelParamButtonClick(TObject *Sender);
-	void __fastcall AddEqCnstrButtonClick(TObject *Sender);
-	void __fastcall AddLbCnstrButtonClick(TObject *Sender);
-	void __fastcall DelLbCnstrButtonClick(TObject *Sender);
-	void __fastcall AddUbCnstrButtonClick(TObject *Sender);
-	void __fastcall DelUbCnstrButtonClick(TObject *Sender);
-	void __fastcall DelEqCnstrButtonClick(TObject *Sender);
+	TPopupMenu *CommonPopup;
+	TMenuItem *AddColumn;
+	TMenuItem *DelColumn;
+	TPageControl *PageControl1;
+	TTabSheet *TabSheet1;
+	TStringGrid *OptParamSG;
+	TStringGrid *OptEqCnstrSG;
+	TStringGrid *OptLbCnstrSG;
+	TPanel *Panel6;
+	TPanel *Panel3;
+	TStringGrid *OptUbCnstrSG;
+	TLabel *Label1;
 	void __fastcall SaveButtonClick(TObject *Sender);
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall LoadButtonClick(TObject *Sender);
+	void __fastcall Panel1Resize(TObject *Sender);
+	void __fastcall OnCommonMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+		  int X, int Y);
+	void __fastcall CommonAddClick(TObject *Sender);
+	void __fastcall CommonDelClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
 	__fastcall TFormOCF(TComponent* Owner);
