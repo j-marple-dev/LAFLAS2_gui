@@ -54,6 +54,7 @@ __published:	// IDE-managed Components
 	TSaveTextFileDialog *SaveDialog;
 	TStringGrid *AerodynamicSG;
 	TStringGrid *PhaseInfoSG;
+	TOpenDialog *OpenDialog;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall FixMassAddButtonClick(TObject *Sender);
 	void __fastcall FixMassDelButtonClick(TObject *Sender);
@@ -79,6 +80,8 @@ __published:	// IDE-managed Components
 	void __fastcall EnvironmentsSGMouseMove(TObject *Sender, TShiftState Shift, int X,
 		  int Y);
 	void __fastcall SaveButtonClick(TObject *Sender);
+	void __fastcall LoadButtonClick(TObject *Sender);
+	void __fastcall FormResize(TObject *Sender);
 
 
 private:	// User declarations

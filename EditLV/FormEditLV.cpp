@@ -5,8 +5,12 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <algorithm>
+#include <iostream>
+#include <fstream>
+#include <vector>
 
 #include "FormEditLV.h"
 //---------------------------------------------------------------------------
@@ -32,7 +36,7 @@ void __fastcall TEditLVForm::FormCreate(TObject *Sender)
   FixMassSG->Cells[0][2] = "Mass [kg]";
 
   VarMassSG->ColWidths[0] = 350;
-  VarMassSG->ColWidths[1] = 150;
+  VarMassSG->ColWidths[1] = 200;
   VarMassSG->Cells[0][0] = "Id.";
   VarMassSG->Cells[0][1] = "Quantity";
   VarMassSG->Cells[0][2] = "Structural Mass [kg]";
@@ -109,7 +113,7 @@ void __fastcall TEditLVForm::FixMassDelButtonClick(TObject *Sender)
 void __fastcall TEditLVForm::VarMassAddButtonClick(TObject *Sender)
 {
   VarMassSG->ColCount += 1;
-  VarMassSG->ColWidths[VarMassSG->ColCount - 1] = 150;
+  VarMassSG->ColWidths[VarMassSG->ColCount - 1] = 200;
 }
 //---------------------------------------------------------------------------
 void __fastcall TEditLVForm::VarMassDelButtonClick(TObject *Sender)
@@ -366,7 +370,7 @@ void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 	  outFile << tostr(VarMassSG->Cells[i][6]) << endl;      // T or M
 	  for (int j = 7; j <= VarMassSG->RowCount-1; j++) {
 		string profile = tostr(VarMassSG->Cells[i][j]);
-		replace(profile.begin(), profile.end(), ',', '\t');
+		replace(profile.begin(), profile.end(), ',', ' ');
 		outFile << profile << endl;                          // thrust profile
 
 	  }
@@ -381,35 +385,35 @@ void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 	  outFile << tostr(AxialForceSG->RowCount) << endl;         // # MCA
 	  for (int j = 0; j <= AxialForceSG->RowCount - 1 ; j++) {
 		string profile = tostr(AxialForceSG->Cells[i][j]);
-		replace(profile.begin(), profile.end(), ',', '\t');
+		replace(profile.begin(), profile.end(), ',', ' ');
 		outFile << profile << endl;                             // MCA profile
 	  }
 	  outFile << tostr(NormalForceSG->RowCount) << endl;        // # MCN
 	  for (int j = 0; j <= NormalForceSG->RowCount - 1 ; j++) {
 		string profile = tostr(NormalForceSG->Cells[i][j]);
-		replace(profile.begin(), profile.end(), ',', '\t');
+		replace(profile.begin(), profile.end(), ',', ' ');
 		outFile << profile << endl;                             // MCN profile
 	  }
 	  outFile << tostr(SideForceSG->RowCount) << endl;          // # MCY
 	  for (int j = 0; j <= SideForceSG->RowCount - 1 ; j++) {
 		string profile = tostr(SideForceSG->Cells[i][j]);
-		replace(profile.begin(), profile.end(), ',', '\t');
+		replace(profile.begin(), profile.end(), ',', ' ');
 		outFile << profile << endl;                             // MCY profile
 	  }
 	}
 	outFile << "#" << endl;
 
 	outFile << "N" << endl;
-	outFile << tostr(EnvironmentsSG->Cells[1][0]) << endl;
+	outFile << tostr(EnvironmentsSG->Cells[1][0]) << " ";
 	outFile << tostr(EnvironmentsSG->Cells[1][1]) << endl;
 	outFile << "#" << endl;
 
 	outFile << "I" << endl;
-	outFile << tostr(InitialSG->Cells[1][0]) << "\t";
-	outFile << tostr(InitialSG->Cells[1][1]) << "\t";
+	outFile << tostr(InitialSG->Cells[1][0]) << " ";
+	outFile << tostr(InitialSG->Cells[1][1]) << " ";
 	outFile << tostr(InitialSG->Cells[1][2]) << "\n";
-	outFile << tostr(InitialSG->Cells[1][3]) << "\t";
-	outFile << tostr(InitialSG->Cells[1][4]) << "\t";
+	outFile << tostr(InitialSG->Cells[1][3]) << " ";
+	outFile << tostr(InitialSG->Cells[1][4]) << " ";
 	outFile << tostr(InitialSG->Cells[1][5]) << "\n";
 	outFile << "#" << endl;
 
@@ -434,17 +438,336 @@ void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 	  replace(flags.begin(), flags.end(), ',', ' ');
 	  outFile << flags << endl;
 	  outFile << tostr(PhaseSG->Cells[i][6]) << endl;      // control type
-	  outFile << tostr(PhaseSG->Cells[i][7])  << "\t";
+	  outFile << tostr(PhaseSG->Cells[i][7])  << " ";
 	  outFile << tostr(PhaseSG->Cells[i][8])  << endl;
-	  outFile << tostr(PhaseSG->Cells[i][9])  << "\t";
+	  outFile << tostr(PhaseSG->Cells[i][9])  << " ";
 	  outFile << tostr(PhaseSG->Cells[i][10]) << endl;
 	  outFile << tostr(PhaseSG->Cells[i][11]) << endl;     // #grid
 	}
 	outFile << "#" << endl;
-
+	outFile << "E";
 	outFile.close();
   }
 }
 //---------------------------------------------------------------------------
 
+void LoadFixMass(ifstream &inFile, TStringGrid *sg)
+{
+  string line;
+
+
+  getline(inFile, line);
+  int count = stoi(line);
+  sg->ColCount = count + 1;
+
+  for (int i = 1; i <= count; i++) {
+	sg->ColWidths[i] = 150;
+
+	getline(inFile, line);                   // id.
+	sg->Cells[i][0] = line.c_str();
+
+	getline(inFile, line);                   // quantity
+	sg->Cells[i][1] = line.c_str();
+
+	getline(inFile, line);                   // mass
+	sg->Cells[i][2] = line.c_str();
+  }
+}
+
+void LoadVarMass(ifstream &inFile, TStringGrid *sg)
+{
+  string line;
+
+
+  getline(inFile, line);
+  int count = stoi(line);
+  sg->ColCount = count + 1;
+
+  for (int i = 1; i <= count; i++) {
+	sg->ColWidths[i] = 200;
+
+	getline(inFile, line);                   // id.
+	sg->Cells[i][0] = line.c_str();
+
+	getline(inFile, line);                   // quantity
+	sg->Cells[i][1] = line.c_str();
+
+	getline(inFile, line);                   // structural mass
+	sg->Cells[i][2] = line.c_str();
+
+	getline(inFile, line);                   // propellant mass
+	sg->Cells[i][3] = line.c_str();
+
+	getline(inFile, line);                   // isp
+	sg->Cells[i][4] = line.c_str();
+
+	getline(inFile, line);                   // nozzle area
+	sg->Cells[i][5] = line.c_str();
+
+	getline(inFile, line);                   // #thrust profile
+	int rowCount = stoi(line);
+	sg->RowCount = 7 + rowCount;
+
+	getline(inFile, line);                   // T or M
+	sg->Cells[i][6] = line.c_str();
+
+	string num1, num2;
+	for (int j = 7; j < 7+rowCount; j++) {
+	  getline(inFile, line);
+	  istringstream iss(line);
+	  iss >> num1 >> num2;
+	  line = num1 + ", " + num2;
+	  sg->Cells[i][j] = line.c_str();
+	}
+  }
+}
+
+void LoadAerodynamics(ifstream &inFile, TStringGrid *adSG, TStringGrid *afSG, TStringGrid *nfSG, TStringGrid *sfSG)
+{
+  string line;
+  int    rowCount;
+
+
+  getline(inFile, line);
+  int count = stoi(line);
+  adSG->ColCount = count + 1;
+  afSG->ColCount = count + 1;
+  nfSG->ColCount = count + 1;
+  sfSG->ColCount = count + 1;
+
+  for (int i = 1; i <= count; i++) {
+	adSG->ColWidths[i] = 150;
+	afSG->ColWidths[i] = 150;
+	nfSG->ColWidths[i] = 150;
+	sfSG->ColWidths[i] = 150;
+
+	getline(inFile, line);                   // id.
+	adSG->Cells[i][0] = line.c_str();
+
+	getline(inFile, line);                   // ref area
+	adSG->Cells[i][1] = line.c_str();
+
+	getline(inFile, line);                 // #axial force
+	rowCount = stoi(line);
+	afSG->RowCount = rowCount;
+
+	string num1, num2;
+	for (int j = 0; j < rowCount; j++) {
+	  getline(inFile, line);
+	  istringstream iss(line);
+	  iss >> num1 >> num2;
+	  line = num1 + ", " + num2;
+	  afSG->Cells[i][j] = line.c_str();
+	}
+
+	getline(inFile, line);                 // #normal force
+	rowCount = stoi(line);
+	nfSG->RowCount = rowCount;
+
+	for (int j = 0; j < rowCount; j++) {
+	  getline(inFile, line);
+	  istringstream iss(line);
+	  iss >> num1 >> num2;
+	  line = num1 + ", " + num2;
+	  nfSG->Cells[i][j] = line.c_str();
+	}
+
+	getline(inFile, line);                 // #side force
+	rowCount = stoi(line);
+	sfSG->RowCount = rowCount;
+
+	for (int j = 0; j < rowCount; j++) {
+	  getline(inFile, line);
+	  istringstream iss(line);
+	  iss >> num1 >> num2;
+	  line = num1 + ", " + num2;
+	  sfSG->Cells[i][j] = line.c_str();
+	}
+  }
+}
+
+void LoadEnvironments(ifstream &inFile, TStringGrid *sg)
+{
+  string line;
+
+  string earth;
+  string air;
+
+
+  getline(inFile, line);
+  istringstream iss(line);
+  iss >> earth >> air;
+
+  sg->Cells[1][0] = earth.c_str();
+  sg->Cells[1][1] = air.c_str();
+}
+
+void LoadInitialCondition(ifstream &inFile, TStringGrid *sg)
+{
+  string line;
+
+  string lat0, lon0, alt0;
+  string azi0, pat0, vel0;
+
+
+  getline(inFile, line);
+  istringstream iss(line);
+  iss >> lat0 >> lon0 >> alt0;
+
+  getline(inFile, line);
+  istringstream iss2(line);            // iss.str(line) is not working
+  iss2 >> azi0 >> pat0 >> vel0;
+
+  sg->Cells[1][0] = lat0.c_str();
+  sg->Cells[1][1] = lon0.c_str();
+  sg->Cells[1][2] = alt0.c_str();
+  sg->Cells[1][3] = azi0.c_str();
+  sg->Cells[1][4] = pat0.c_str();
+  sg->Cells[1][5] = vel0.c_str();
+}
+
+void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
+{
+  string line;
+  string str1, str2, str3;
+
+  int phaseCount;
+
+
+  getline(inFile, line);
+  istringstream iss(line);
+  iss >> str1 >> str2 >> str3;
+  phaseCount          = stoi(str1);      // #phase
+  infoSG->Cells[1][0] = str2.c_str();    // #iip
+  infoSG->Cells[1][1] = str3.c_str();    // #iip rate
+
+  getline(inFile, line);
+  infoSG->Cells[1][2] = line.c_str();    // phase type
+
+  getline(inFile, line);
+  infoSG->Cells[1][3] = line.c_str();    // phase sequence
+
+  phaseSG->ColCount = phaseCount + 1;
+  for (int i = 1; i <= phaseCount; i++) {
+	phaseSG->ColWidths[i] = 150;
+
+	getline(inFile, line);
+	phaseSG->Cells[i][0] = line.c_str();
+
+	getline(inFile, line);
+	phaseSG->Cells[i][1] = line.c_str();
+
+	getline(inFile, line);
+	phaseSG->Cells[i][2] = line.c_str();
+
+	getline(inFile, line);                           // fixmass attatched flags
+	stringstream ss3(line);
+	string result3;
+	while (ss3 >> str1) {
+	  if (!result3.empty()) {
+		result3 += ", ";
+	  }
+	  result3 += str1;
+	}
+	phaseSG->Cells[i][3] = result3.c_str();
+
+	getline(inFile, line);
+	stringstream ss4(line);
+	string result4;
+	while (ss4 >> str1) {
+	  if (!result4.empty()) {
+		result4 += ", ";
+	  }
+	  result4 += str1;
+	}
+	phaseSG->Cells[i][4] = result4.c_str();
+
+	getline(inFile, line);
+	stringstream ss5(line);
+	string result5;
+	while (ss5 >> str1) {
+	  if (!result5.empty()) {
+		result5 += ", ";
+	  }
+	  result5 += str1;
+	}
+	phaseSG->Cells[i][5] = result5.c_str();
+
+	getline(inFile, line);
+	phaseSG->Cells[i][6] = line.c_str();
+
+	getline(inFile, line);
+	istringstream ss7(line);
+	int j = 7;
+	while (ss7 >> str1) {
+	  phaseSG->Cells[i][j] = str1.c_str();
+	  j++;
+	}
+
+	getline(inFile, line);
+	istringstream ss9(line);
+	j = 9;
+	while (ss9 >> str1) {
+	  phaseSG->Cells[i][j] = str1.c_str();
+	  j++;
+	}
+
+	getline(inFile, line);
+	phaseSG->Cells[i][11] = line.c_str();
+  }
+
+/*
+  PhaseSG->Cells[0][7]  = "  {Pitch_s | Alpha_s} [deg]";
+  PhaseSG->Cells[0][8]  = "  {Pitch_e | Alpha_e} [deg]";
+  PhaseSG->Cells[0][9]  = "  {Yaw_s | Beta_s}    [deg]";
+  PhaseSG->Cells[0][10] = "  {Yaw_e | Beta_e}    [deg]";
+  PhaseSG->Cells[0][11] = "Number of Grids";
+*/
+}
+
+void __fastcall TEditLVForm::LoadButtonClick(TObject *Sender)
+{
+  OpenDialog->Title = "Load Launch Vehicle File";
+  if (OpenDialog->Execute()) {
+	String filePath = OpenDialog->FileName;
+
+	ifstream inFile(filePath.c_str());
+	if (!inFile) {
+	  ShowMessage("Cannot find: " + filePath);
+	  return;
+	}
+
+	int    i;
+	int    count;
+	string line;
+
+	while (getline(inFile, line)) {   // false when eof
+	  switch (line[0]) {
+	  case 'F': LoadFixMass(inFile, FixMassSG); 	break;
+	  case 'V': LoadVarMass(inFile, VarMassSG);		break;
+	  case 'A': LoadAerodynamics(inFile, AerodynamicSG, AxialForceSG, NormalForceSG, SideForceSG);  break;
+	  case 'N': LoadEnvironments(inFile, EnvironmentsSG);  break;
+	  case 'I': LoadInitialCondition(inFile, InitialSG);   break;
+	  case 'P': LoadPhase(inFile, PhaseInfoSG, PhaseSG);   break;
+	  case 'T':
+		break;
+
+	  default:
+		break;
+	  }
+
+	}
+
+
+
+	inFile.close();
+  }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::FormResize(TObject *Sender)
+{
+  PhaseSG->Width = PhaseInfoSG->Width; //this->ClientWidth - 20;
+}
+//---------------------------------------------------------------------------
 

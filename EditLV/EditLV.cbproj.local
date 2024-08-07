@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <BorlandProject>
 	<Transactions>
-    <Transaction>1899-12-30 00:00:00.000.532,D:\Dev\EditLVPCH1.h=D:\Dev\Project2PCH1.h</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\FormEditLV.h=D:\LAFLAS\EditLV\MainForm.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\MainForm.cpp=D:\LAFLAS\EditLV\FormEditLV.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.532,D:\Dev\Project2PCH1.h=D:\Dev\EditLVPCH1.h</Transaction>
     <Transaction>1899-12-30 00:00:00.000.723,=D:\Dev\Project2PCH1.h</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\MainForm.cpp=D:\Dev\Unit2.cpp</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\MainForm.h=D:\Dev\Unit2.h</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\FormEditLV.cpp=D:\LAFLAS\EditLV\MainForm.cpp</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\Unit2.dfm=D:\Dev\MainForm.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\MainForm.dfm=D:\LAFLAS\EditLV\FormEditLV.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\MainForm.h=D:\LAFLAS\EditLV\FormEditLV.h</Transaction>
     <Transaction>1899-12-30 00:00:00.000.117,D:\Dev\EditLV.cbproj=D:\Dev\EditLV.cbproj</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.538,D:\Dev\EditLV.cbproj=D:\Dev\Project2.cbproj</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.354,D:\LAFLAS\EditLV\FormEditLV.dfm=D:\LAFLAS\EditLV\MainForm.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\Unit2.cpp=D:\Dev\MainForm.cpp</Transaction>
     <Transaction>1899-12-30 00:00:00.000.129,=D:\Dev\Unit2.cpp</Transaction>
-    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\MainForm.dfm=D:\Dev\Unit2.dfm</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.189,D:\Dev\Unit2.h=D:\Dev\MainForm.h</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.538,D:\Dev\Project2.cbproj=D:\Dev\EditLV.cbproj</Transaction>
   </Transactions>
 </BorlandProject>
