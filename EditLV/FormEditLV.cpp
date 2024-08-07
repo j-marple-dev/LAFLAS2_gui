@@ -112,31 +112,6 @@ void __fastcall TEditLVForm::DelThrustButtonClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TEditLVForm::AerodynamicAddButtonClick(TObject *Sender)
-{
-  AerodynamicSG->ColCount += 1;
-  AerodynamicSG->ColWidths[AerodynamicSG->ColCount - 1] = 150;
-  AxialForceSG->ColCount  += 1;
-  AxialForceSG->ColWidths[AxialForceSG->ColCount - 1] = 150;
-  NormalForceSG->ColCount += 1;
-  NormalForceSG->ColWidths[NormalForceSG->ColCount - 1] = 150;
-  SideForceSG->ColCount   += 1;
-  SideForceSG->ColWidths[SideForceSG->ColCount - 1] = 150;
-}
-//---------------------------------------------------------------------------
-
-void __fastcall TEditLVForm::AerodynamicDelButtonClick(TObject *Sender)
-{
-  if (AerodynamicSG->ColCount == 2) {
-	return;
-  }
-  AerodynamicSG->ColCount -= 1;
-  AxialForceSG->ColCount  -= 1;
-  NormalForceSG->ColCount -= 1;
-  SideForceSG->ColCount   -= 1;
-}
-//---------------------------------------------------------------------------
-
 void __fastcall TEditLVForm::AddAFButtonClick(TObject *Sender)
 {
   AxialForceSG->RowCount += 1;
@@ -299,7 +274,11 @@ string tostr(String str)
 
 void __fastcall TEditLVForm::SaveButtonClick(TObject *Sender)
 {
-  SaveDialog->Title = "Save Launch Vehicle File";
+  SaveDialog->Title       = "Save Launch Vehicle File";
+  SaveDialog->Filter      = "LV File (*.lv)|*.lv|LAFLAS 1 File (*.dat)|*.dat";
+  SaveDialog->FilterIndex = 1;
+  SaveDialog->DefaultExt  = "lv";
+
   if (SaveDialog->Execute()) {
 	String fileName = SaveDialog->FileName;
 
@@ -684,7 +663,10 @@ void LoadPhase(ifstream &inFile, TStringGrid *infoSG, TStringGrid *phaseSG)
 
 void __fastcall TEditLVForm::LoadButtonClick(TObject *Sender)
 {
-  OpenDialog->Title = "Load Launch Vehicle File";
+  OpenDialog->Title       = "Load Launch Vehicle File";
+  OpenDialog->Filter      = "LV File (*.lv)|*.lv|LAFLAS 1 File (*.dat)|*.dat";
+  OpenDialog->FilterIndex = 1;
+
   if (OpenDialog->Execute()) {
 	String filePath = OpenDialog->FileName;
 
@@ -799,4 +781,70 @@ void __fastcall TEditLVForm::CommonSGMouseUp(TObject *Sender, TMouseButton Butto
   }
 }
 //---------------------------------------------------------------------------
+
+static TStringGrid *CommonAeroSG;
+
+void __fastcall TEditLVForm::AerodynamicAddClick(TObject *Sender)
+{
+  CommonSG = AerodynamicSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonAddClick(Sender);
+
+  CommonSG = AxialForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonAddClick(Sender);
+
+  CommonSG = NormalForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonAddClick(Sender);
+
+  CommonSG = SideForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonAddClick(Sender);
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::AerodynamicDelClick(TObject *Sender)
+{
+  CommonSG = AerodynamicSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonDelClick(Sender);
+
+  CommonSG = AxialForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonDelClick(Sender);
+
+  CommonSG = NormalForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonDelClick(Sender);
+
+  CommonSG = SideForceSG;
+  CommonSG->Tag = CommonAeroSG->Tag;
+  CommonDelClick(Sender);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TEditLVForm::CommonAeroSGMouseUp(TObject *Sender, TMouseButton Button,
+          TShiftState Shift, int X, int Y)
+{
+  TStringGrid *grid = dynamic_cast<TStringGrid*>(Sender);
+
+  if (Button == mbRight) {
+	int ACol, ARow;
+	grid->MouseToCell(X, Y, ACol, ARow);
+
+	if (ACol == -1 || ARow == -1) {
+	  return;
+	}
+
+	CommonAeroSG = grid;
+	CommonAeroSG->Tag = ACol;
+
+	TPoint point = CommonAeroSG->ClientToScreen(Point(X, Y));
+	AerodynamicPopup->Popup(point.x, point.y);
+  }
+}
+//---------------------------------------------------------------------------
+
 

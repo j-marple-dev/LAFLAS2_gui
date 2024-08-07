@@ -38,15 +38,7 @@ __published:	// IDE-managed Components
 	TStringGrid *InitialSG;
 	TStringGrid *AxialForceSG;
 	TStringGrid *NormalForceSG;
-	TButton *AerodynamicAddButton;
-	TButton *AerodynamicDelButton;
-	TButton *AddSFButton;
-	TButton *DelSFButton;
 	TStringGrid *SideForceSG;
-	TButton *AddNFButton;
-	TButton *DelNFButton;
-	TButton *AddAFButton;
-	TButton *DelAFButton;
 	TStringGrid *PhaseSG;
 	TSaveTextFileDialog *SaveDialog;
 	TStringGrid *AerodynamicSG;
@@ -55,11 +47,23 @@ __published:	// IDE-managed Components
 	TPopupMenu *CommonPopupMenu;
 	TMenuItem *AddFixMass;
 	TMenuItem *DelFixMass;
+	TPopupMenu *AerodynamicPopup;
+	TMenuItem *AddColumn1;
+	TMenuItem *DeleteColumn1;
+	TPanel *Panel2;
+	TButton *AddSFButton;
+	TButton *DelSFButton;
+	TPanel *Panel3;
+	TButton *AddNFButton;
+	TButton *DelNFButton;
+	TPanel *Panel5;
+	TPanel *Panel6;
+	TButton *DelAFButton;
+	TButton *AddAFButton;
+	TPanel *Panel4;
 	void __fastcall FormCreate(TObject *Sender);
 	void __fastcall AddThrustButtonClick(TObject *Sender);
 	void __fastcall DelThrustButtonClick(TObject *Sender);
-	void __fastcall AerodynamicAddButtonClick(TObject *Sender);
-	void __fastcall AerodynamicDelButtonClick(TObject *Sender);
 	void __fastcall AddAFButtonClick(TObject *Sender);
 	void __fastcall DelAFButtonClick(TObject *Sender);
 	void __fastcall AddNFButtonClick(TObject *Sender);
@@ -79,6 +83,10 @@ __published:	// IDE-managed Components
 	void __fastcall CommonAddClick(TObject *Sender);
 	void __fastcall CommonDelClick(TObject *Sender);
 	void __fastcall CommonSGMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+          int X, int Y);
+	void __fastcall AerodynamicAddClick(TObject *Sender);
+	void __fastcall AerodynamicDelClick(TObject *Sender);
+	void __fastcall CommonAeroSGMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
           int X, int Y);
 
 
