@@ -1,7 +1,7 @@
 object EditLVForm: TEditLVForm
   Left = 0
   Top = 0
-  Caption = 'Launch Vehicle Editor'
+  Caption = 'LAFLAS Launch Vehicle Editor'
   ClientHeight = 722
   ClientWidth = 831
   Color = clBtnFace
@@ -18,6 +18,10 @@ object EditLVForm: TEditLVForm
     Top = 0
     Width = 831
     Height = 680
+    Margins.Left = 10
+    Margins.Top = 10
+    Margins.Right = 10
+    Margins.Bottom = 10
     ActivePage = PhaseTab
     Align = alClient
     Font.Charset = DEFAULT_CHARSET
@@ -32,22 +36,6 @@ object EditLVForm: TEditLVForm
     ExplicitHeight = 663
     object FixMassTab: TTabSheet
       Caption = 'Fixed mass'
-      object FixMassAddButton: TSpeedButton
-        Left = 728
-        Top = 607
-        Width = 23
-        Height = 22
-        Caption = 'Add'
-        OnClick = FixMassAddButtonClick
-      end
-      object FixMassDelButton: TSpeedButton
-        Left = 771
-        Top = 607
-        Width = 49
-        Height = 22
-        Caption = 'Delete'
-        OnClick = FixMassDelButtonClick
-      end
       object FixMassSG: TStringGrid
         Left = 0
         Top = 0
@@ -58,14 +46,15 @@ object EditLVForm: TEditLVForm
         FixedColor = clGreen
         RowCount = 3
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goTabs, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
+        OnMouseUp = CommonSGMouseUp
         ColWidths = (
           118
           108)
@@ -88,12 +77,13 @@ object EditLVForm: TEditLVForm
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goTabs, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = VarMassSGMouseMove
+        OnMouseUp = CommonSGMouseUp
         ColWidths = (
           64
           92)
@@ -107,40 +97,22 @@ object EditLVForm: TEditLVForm
           24
           24)
       end
-      object VarMassAddButton: TButton
-        Left = 664
-        Top = 607
-        Width = 75
-        Height = 25
-        Caption = 'Add'
-        TabOrder = 1
-        OnClick = VarMassAddButtonClick
-      end
-      object VarMassDelButton: TButton
-        Left = 745
-        Top = 607
-        Width = 75
-        Height = 25
-        Caption = 'Delete'
-        TabOrder = 2
-        OnClick = VarMassDelButtonClick
-      end
       object AddThrustButton: TButton
         Left = 3
         Top = 607
-        Width = 75
+        Width = 100
         Height = 25
         Caption = 'Add Thrust'
-        TabOrder = 3
+        TabOrder = 1
         OnClick = AddThrustButtonClick
       end
       object DelThrustButton: TButton
-        Left = 92
+        Left = 117
         Top = 607
-        Width = 75
+        Width = 100
         Height = 25
         Caption = 'Delete Thrust'
-        TabOrder = 4
+        TabOrder = 2
         OnClick = DelThrustButtonClick
       end
     end
@@ -155,10 +127,10 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 1
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
@@ -172,10 +144,10 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 1
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
@@ -225,10 +197,10 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 1
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
@@ -279,10 +251,10 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 2
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
@@ -304,10 +276,10 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 12
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
@@ -315,25 +287,8 @@ object EditLVForm: TEditLVForm
         ShowHint = False
         TabOrder = 0
         OnMouseMove = PhaseSGMouseMove
+        OnMouseUp = CommonSGMouseUp
         OnSelectCell = PhaseSGSelectCell
-      end
-      object PhaseDelButton: TButton
-        Left = 745
-        Top = 615
-        Width = 75
-        Height = 25
-        Caption = 'Delete Phase'
-        TabOrder = 1
-        OnClick = PhaseDelButtonClick
-      end
-      object PhaseAddButton: TButton
-        Left = 656
-        Top = 615
-        Width = 75
-        Height = 25
-        Caption = 'Add Phase'
-        TabOrder = 2
-        OnClick = PhaseAddButtonClick
       end
       object PhaseInfoSG: TStringGrid
         Left = 0
@@ -348,16 +303,16 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 4
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
         Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
         ParentFont = False
         ParentShowHint = False
         ShowHint = False
-        TabOrder = 3
+        TabOrder = 1
         ExplicitWidth = 817
       end
     end
@@ -376,12 +331,12 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 2
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
         OnMouseMove = EnvironmentsSGMouseMove
@@ -399,12 +354,12 @@ object EditLVForm: TEditLVForm
         ColCount = 2
         RowCount = 6
         FixedRows = 0
-        Font.Charset = DEFAULT_CHARSET
+        Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -12
-        Font.Name = 'Consolas'
+        Font.Name = 'Segoe UI'
         Font.Style = []
-        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goEditing, goFixedRowDefAlign]
+        Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goColSizing, goEditing, goFixedRowDefAlign]
         ParentFont = False
         TabOrder = 0
       end
@@ -442,11 +397,23 @@ object EditLVForm: TEditLVForm
     end
   end
   object SaveDialog: TSaveTextFileDialog
-    Left = 748
-    Top = 666
+    Left = 564
+    Top = 682
   end
   object OpenDialog: TOpenDialog
-    Left = 696
-    Top = 664
+    Left = 520
+    Top = 680
+  end
+  object CommonPopupMenu: TPopupMenu
+    Left = 608
+    Top = 680
+    object AddFixMass: TMenuItem
+      Caption = 'Add Column'
+      OnClick = CommonAddClick
+    end
+    object DelFixMass: TMenuItem
+      Caption = 'Delete Column'
+      OnClick = CommonDelClick
+    end
   end
 end

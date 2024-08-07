@@ -15,6 +15,7 @@
 #include <Vcl.ValEdit.hpp>
 #include <Vcl.Dialogs.hpp>
 #include <Vcl.ExtDlgs.hpp>
+#include <Vcl.Menus.hpp>
 //---------------------------------------------------------------------------
 class TEditLVForm : public TForm
 {
@@ -30,11 +31,7 @@ __published:	// IDE-managed Components
 	TButton *LoadButton;
 	TButton *SaveButton;
 	TStringGrid *FixMassSG;
-	TSpeedButton *FixMassAddButton;
-	TSpeedButton *FixMassDelButton;
 	TStringGrid *VarMassSG;
-	TButton *VarMassAddButton;
-	TButton *VarMassDelButton;
 	TButton *AddThrustButton;
 	TButton *DelThrustButton;
 	TStringGrid *EnvironmentsSG;
@@ -50,16 +47,15 @@ __published:	// IDE-managed Components
 	TButton *DelNFButton;
 	TButton *AddAFButton;
 	TButton *DelAFButton;
-    TStringGrid *PhaseSG;
+	TStringGrid *PhaseSG;
 	TSaveTextFileDialog *SaveDialog;
 	TStringGrid *AerodynamicSG;
 	TStringGrid *PhaseInfoSG;
 	TOpenDialog *OpenDialog;
+	TPopupMenu *CommonPopupMenu;
+	TMenuItem *AddFixMass;
+	TMenuItem *DelFixMass;
 	void __fastcall FormCreate(TObject *Sender);
-	void __fastcall FixMassAddButtonClick(TObject *Sender);
-	void __fastcall FixMassDelButtonClick(TObject *Sender);
-	void __fastcall VarMassAddButtonClick(TObject *Sender);
-	void __fastcall VarMassDelButtonClick(TObject *Sender);
 	void __fastcall AddThrustButtonClick(TObject *Sender);
 	void __fastcall DelThrustButtonClick(TObject *Sender);
 	void __fastcall AerodynamicAddButtonClick(TObject *Sender);
@@ -70,8 +66,6 @@ __published:	// IDE-managed Components
 	void __fastcall DelNFButtonClick(TObject *Sender);
 	void __fastcall AddSFButtonClick(TObject *Sender);
 	void __fastcall DelSFButtonClick(TObject *Sender);
-	void __fastcall PhaseAddButtonClick(TObject *Sender);
-	void __fastcall PhaseDelButtonClick(TObject *Sender);
 	void __fastcall MainPageControlChange(TObject *Sender);
 	void __fastcall PhaseSGMouseMove(TObject *Sender, TShiftState Shift, int X, int Y);
 	void __fastcall PhaseSGSelectCell(TObject *Sender, System::LongInt ACol, System::LongInt ARow,
@@ -82,6 +76,10 @@ __published:	// IDE-managed Components
 	void __fastcall SaveButtonClick(TObject *Sender);
 	void __fastcall LoadButtonClick(TObject *Sender);
 	void __fastcall FormResize(TObject *Sender);
+	void __fastcall CommonAddClick(TObject *Sender);
+	void __fastcall CommonDelClick(TObject *Sender);
+	void __fastcall CommonSGMouseUp(TObject *Sender, TMouseButton Button, TShiftState Shift,
+          int X, int Y);
 
 
 private:	// User declarations
